@@ -17,6 +17,14 @@ def check_all_seen(G, items):
         continue
     return True
 
+def find_next_post(G, node, previously_posted):
+    for neighbor in G.neighbors(node):
+        if neighbor['current_post'] == 0:
+            continue
+        else:
+            G.node[node]['seen'][neighbor['current_post']] = True
+
+
 """
 y_t = []
 for j in tqdm(range(1000)):
@@ -54,14 +62,17 @@ for i in F.nodes():
         F[i][k]['strength'] = get_strength()
 
 seen_dict = {k + 1:False for k in range(items)}
+#seen_dict = [False for k in range(items)]
 
 for i in tqdm(range(n)):
     # Create empty graph
 
     G = nx.Graph()
+    #nx.set_node_attributes(G, 'newsfeed', 0)
+    #nx.set_node_attributes(G, 'seen', 0)
+    nx.set_node_attributes(G, 'current_post', 0)
+    nx.set_node_attributes(G, 'previously_posted', [])
 
-    nx.set_node_attributes(G, 'newsfeed', {})
-    nx.set_node_attributes(G, 'seen', {})
     """
     # Create newsfeed for each node in F
     for node in tqdm(F.nodes()):
@@ -143,24 +154,55 @@ for i in tqdm(range(n)):
 
     # Use this to avoid generating the graph during testing. Remove for
     # production
+
     with open('test.edgelist', 'r') as file:
         for line in file:
             node = int(line.split(' ')[0])
             if line.split(' ')[1] == 'newsfeed':
-                G[node]['newsfeed'] = [int(i) for i in ''.join(line.split(' ')[
-                    2:])[1:-2].split(',')]
+                newsfeed = [int(i) for i in ''.join(line.split(
+                    ' ')[2:])[1:-2].split(',')]
+                G.add_node(node, {'newsfeed': newsfeed, 'seen':
+                    {k + 1:False for k in range(items)}})
+            else:
+                continue
+
+    with open('test.edgelist', 'r') as file:
+        for line in file:
+            node = int(line.split(' ')[0])
+            if line.split(' ')[1] == 'newsfeed':
+                continue
             elif line.split(' ')[1] == 'seen':
-                G[node]['seen'] = seen_dict
+                continue
             else:
                 G.add_edge(node, int(line.split(' ')[1]))
 
     all_seen_all = False
     while not all_seen_all:
-        generators = np.random.choice(G.nodes(), size=items, replace=False)
+
         # Generate 20 random posts at nodes
+        generators = np.random.choice(G.nodes(), size=items, replace=False)
+
         for post, node in enumerate(generators):
-            G[node]['seen'][post] = True
-        print(G[generators[0]]['seen'][1])
+            G.node[node]['seen'][post + 1] = True
+            G.node[node]['current_post'] = post + 1
+
+        # For every node
+        for node in G.nodes():
+            # Check posts it can see:
+            for neighbor in G.neighbors(node):
+                if neighbor['current_post'] == 0:
+                    continue
+                else:
+                    G.node[node]['seen'][neighbor['current_post']] = True
+
+            previously_posted = []
+
+            G.node[node]['current_post'] = find_next_post(G, node, previously_posted)
+
+
+
+
+
 
         # Update
 
