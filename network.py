@@ -46,12 +46,12 @@ def find_next_post(G, newsfeed, previously_posted):
 def random_graph_test(F, n, items, newsfeed_composition):
     iterations = []
     diameters = []
-    for i in tqdm(range(n)):
+    for z in tqdm(range(n)):
         # Create empty graph
         G = nx.Graph()
 
         # Create newsfeed for each node in F
-        for node in tqdm(F.nodes()):
+        for node in F.nodes():
             w_edges = []
             # Get edge strength for each edge between the current node and its
             # neighbors
@@ -62,7 +62,7 @@ def random_graph_test(F, n, items, newsfeed_composition):
             strong_nodes = [i for i in w_edges if i[1] > 1.4]
             # Sort strong nodes descending for strength
             strong_nodes = sorted(strong_nodes, key=itemgetter(1), reverse=True)
-            # FIlter w_edges for remaining 2/3rd of edges
+            # Filter w_edges for remaining 2/3rd of edges
             weak_nodes = [i for i in w_edges if i[1] <= 1.4]
             # Sort weak nodes descending for strength
             weak_nodes = sorted(weak_nodes, key=itemgetter(1), reverse=True)
@@ -73,6 +73,7 @@ def random_graph_test(F, n, items, newsfeed_composition):
             # relative strength
             strong_tot = sum([i[1] for i in strong_nodes])
             weak_tot = sum([i[1] for i in weak_nodes])
+
             strong_proba = []
             for j in strong_nodes:
                 strong_proba.append(j[1]/strong_tot)
@@ -94,7 +95,9 @@ def random_graph_test(F, n, items, newsfeed_composition):
                                                  replace=False, p=strong_proba))
 
             # If there aren't enough weak nodes to fill the quota
-            if len(weak_nodes) < newsfeed_composition[1]:
+            if len(weak_nodes) == 0:
+                pass
+            elif len(weak_nodes) < newsfeed_composition[1]:
                 # Add all available weak nodes
                 newsfeed.extend([i[0] for i in weak_nodes])
             else:
@@ -158,7 +161,6 @@ def random_graph_test(F, n, items, newsfeed_composition):
 
         all_seen_all = False
         i = 0
-        t0 = time.time()
         while not all_seen_all:
 
             # For every node
@@ -185,12 +187,9 @@ def random_graph_test(F, n, items, newsfeed_composition):
 
             # Check stopping criteria
             all_seen_all, perc_complete = check_all_seen(G, items)
-            t1 = time.time()
-            print("Iteration", i, " complete. Time: " + str(round(t1 - t0,
-                    0)) + "s.\n")
-            print("Percentage complete: " + str(perc_complete) + "%")
             i += 1
 
+        print("Iteration " + str(z) + "/" + str(n) + " complete.")
         iterations.append(i)
         diameters.append(nx.diameter(F))
 
@@ -216,7 +215,12 @@ def main():
         for k in F.neighbors(i):
             F[i][k]['strength'] = get_strength()
 
-    n = 1
+    n = 10
     items = 20
-    newsfeed_composition = [7, 2, 1]
+    newsfeed_composition = [10, 0, 0]
     iteration, diameter = random_graph_test(F, n, items, newsfeed_composition)
+    print("Average iterations: " + iteration)
+    print("Average Diameter: " + diameter)
+
+if __name__ == '__main__':
+    main()
