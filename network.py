@@ -42,176 +42,181 @@ def find_next_post(G, newsfeed, previously_posted):
         # Post a random item that has previously been posted
         return np.random.choice(previously_posted)
 
-F = nx.Graph()
 
-# Create original network from facebook.txt
-nx.set_node_attributes(F, 'value', {})
-with open('facebook_combined.txt', 'r') as file:
-    for line in file:
-        if line[0] != '#':
-            F.add_edge(int(line.strip().split(' ')[0]),
-                       int(line.strip().split(' ')[1]),
-                       strength=0)
+def random_graph_test(F, n, items, newsfeed_composition):
+    iterations = []
+    diameters = []
+    for i in tqdm(range(n)):
+        # Create empty graph
+        G = nx.Graph()
 
-# Start simulation
-n = 1
-items = 20
-newsfeed_composition = [7,2,1]
+        # Create newsfeed for each node in F
+        for node in tqdm(F.nodes()):
+            w_edges = []
+            # Get edge strength for each edge between the current node and its
+            # neighbors
+            for j in F.neighbors(node):
+                w_edges.append([j, F.get_edge_data(node, j)['strength']])
 
-# Add 'strength of connection' as weight to each edge
-for i in F.nodes():
-    for k in F.neighbors(i):
-        F[i][k]['strength'] = get_strength()
+            # Filter w_edges for the strongest 1/3rd of edges
+            strong_nodes = [i for i in w_edges if i[1] > 1.4]
+            # Sort strong nodes descending for strength
+            strong_nodes = sorted(strong_nodes, key=itemgetter(1), reverse=True)
+            # FIlter w_edges for remaining 2/3rd of edges
+            weak_nodes = [i for i in w_edges if i[1] <= 1.4]
+            # Sort weak nodes descending for strength
+            weak_nodes = sorted(weak_nodes, key=itemgetter(1), reverse=True)
+            # Set all other non-neighbor nodes as random
+            random_nodes = [i for i in F.nodes() if i not in F.neighbors(node)]
 
-for i in tqdm(range(n)):
-    # Create empty graph
-    G = nx.Graph()
+            # Calculate probabilities for each strong and weak node based on
+            # relative strength
+            strong_tot = sum([i[1] for i in strong_nodes])
+            weak_tot = sum([i[1] for i in weak_nodes])
+            strong_proba = []
+            for j in strong_nodes:
+                strong_proba.append(j[1]/strong_tot)
+            weak_proba = []
+            for j in weak_nodes:
+                weak_proba.append(j[1] / weak_tot)
 
-    # Create newsfeed for each node in F
-    for node in tqdm(F.nodes()):
-        w_edges = []
-        # Get edge strength for each edge between the current node and its
-        # neighbors
-        for j in F.neighbors(node):
-            w_edges.append([j, F.get_edge_data(node, j)['strength']])
+            # Construct news feed
+            newsfeed = []
 
-        # Filter w_edges for the strongest 1/3rd of edges
-        strong_nodes = [i for i in w_edges if i[1] > 1.4]
-        # Sort strong nodes descending for strength
-        strong_nodes = sorted(strong_nodes, key=itemgetter(1), reverse=True)
-        # FIlter w_edges for remaining 2/3rd of edges
-        weak_nodes = [i for i in w_edges if i[1] <= 1.4]
-        # Sort weak nodes descending for strength
-        weak_nodes = sorted(weak_nodes, key=itemgetter(1), reverse=True)
-        # Set all other non-neighbor nodes as random
-        random_nodes = [i for i in F.nodes() if i not in F.neighbors(node)]
-
-        # Calculate probabilities for each strong and weak node based on
-        # relative strength
-        strong_tot = sum([i[1] for i in strong_nodes])
-        weak_tot = sum([i[1] for i in weak_nodes])
-        strong_proba = []
-        for j in strong_nodes:
-            strong_proba.append(j[1]/strong_tot)
-        weak_proba = []
-        for j in weak_nodes:
-            weak_proba.append(j[1] / weak_tot)
-
-        # Construct news feed
-        newsfeed = []
-
-        # If there aren't enough strong nodes to fill the quota
-        if len(strong_nodes) < newsfeed_composition[0]:
-            newsfeed.extend([i[0] for i in strong_nodes])
-        else:
-            # Add a random selection of strong nodes, weighted according to
-            # strength
-            newsfeed.extend(np.random.choice([i[0] for i in strong_nodes],
-                                             size=newsfeed_composition[0],
-                                             replace=False, p=strong_proba))
-
-        # If there aren't enough weak nodes to fill the quota
-        if len(weak_nodes) < newsfeed_composition[1]:
-            # Add all available weak nodes
-            newsfeed.extend([i[0] for i in weak_nodes])
-        else:
-            # Add a random selection of weak nodes, weighted according to
-            # strength
-            newsfeed.extend(np.random.choice([i[0] for i in weak_nodes],
-                            size=newsfeed_composition[1],
-                            replace=False, p=weak_proba))
-
-        # For remaining spots in the newsfeed, populate with random
-        for j in range(sum(newsfeed_composition) - len(newsfeed)):
-            newsfeed.append(np.random.choice(random_nodes))
-
-        # Add the newsfeed edges to the new graph
-        for j in newsfeed:
-            G.add_edge(node, j)
-        G.node[node]['newsfeed'] = newsfeed
-        G.node[node]['seen'] = {k + 1: False for k in range(items)}
-        G.node[node]['current_post'] = 0
-        G.node[node]['previously_posted'] = []
-
-    nx.write_edgelist(G, "test.edgelist")
-    """
-    # Use this to avoid generating the graph during testing. Remove for
-    # production
-
-    with open('test.edgelist', 'r') as file:
-        for line in file:
-            node = int(line.split(' ')[0])
-            if line.split(' ')[1] == 'newsfeed':
-                newsfeed = [int(i) for i in ''.join(line.split(
-                    ' ')[2:])[1:-2].split(',')]
-                G.add_node(node, {'newsfeed': newsfeed, 'seen':
-                    {k + 1:False for k in range(items)}, 'current_post': 0,
-                                  'previously_posted': []})
+            # If there aren't enough strong nodes to fill the quota
+            if len(strong_nodes) < newsfeed_composition[0]:
+                newsfeed.extend([i[0] for i in strong_nodes])
             else:
-                continue
+                # Add a random selection of strong nodes, weighted according to
+                # strength
+                newsfeed.extend(np.random.choice([i[0] for i in strong_nodes],
+                                                 size=newsfeed_composition[0],
+                                                 replace=False, p=strong_proba))
 
-    with open('test.edgelist', 'r') as file:
-        for line in file:
-            node = int(line.split(' ')[0])
-            if line.split(' ')[1] == 'newsfeed':
-                continue
-            elif line.split(' ')[1] == 'seen':
-                continue
-            elif line.split(' ')[1] == 'current_item':
-                continue
-            elif line.split(' ')[1] == 'previously_posted':
-                continue
+            # If there aren't enough weak nodes to fill the quota
+            if len(weak_nodes) < newsfeed_composition[1]:
+                # Add all available weak nodes
+                newsfeed.extend([i[0] for i in weak_nodes])
             else:
-                G.add_edge(node, int(line.split(' ')[1]))
-    """
-    # Generate random posts at nodes
-    generators = np.random.choice(G.nodes(), size=items, replace=False)
+                # Add a random selection of weak nodes, weighted according to
+                # strength
+                newsfeed.extend(np.random.choice([i[0] for i in weak_nodes],
+                                size=newsfeed_composition[1],
+                                replace=False, p=weak_proba))
 
-    for post, node in enumerate(generators):
-        G.node[node]['seen'][post + 1] = True
-        G.node[node]['current_post'] = post + 1
-        G.node[node]['previously_posted'] = [post + 1]
+            # For remaining spots in the newsfeed, populate with random
+            for j in range(sum(newsfeed_composition) - len(newsfeed)):
+                newsfeed.append(np.random.choice(random_nodes))
 
-    """
-    for node in G.nodes():
-        print(node, G.node[node]['seen'], G.node[node]['current_post'],
-              G.node[node]['newsfeed'])
-    """
+            # Add the newsfeed edges to the new graph
+            for j in newsfeed:
+                G.add_edge(node, j)
+            G.node[node]['newsfeed'] = newsfeed
+            G.node[node]['seen'] = {k + 1: False for k in range(items)}
+            G.node[node]['current_post'] = 0
+            G.node[node]['previously_posted'] = []
 
-    all_seen_all = False
-    i = 0
-    t0 = time.time()
-    while not all_seen_all:
+        """
+        nx.write_edgelist(G, "test.edgelist")
 
-        # For every node
-        for node in G.nodes():
-            # Check each post that it can see on its newsfeed
-            newsfeed = G.node[node]['newsfeed']
-            for post in newsfeed:
-                # If that post number is 0, ignore it
-                if G.node[post]['current_post'] == 0:
-                    continue
-                # Otherwise
+        # Use this to avoid generating the graph during testing. Remove for
+        # production
+
+        with open('test.edgelist', 'r') as file:
+            for line in file:
+                node = int(line.split(' ')[0])
+                if line.split(' ')[1] == 'newsfeed':
+                    newsfeed = [int(i) for i in ''.join(line.split(
+                        ' ')[2:])[1:-2].split(',')]
+                    G.add_node(node, {'newsfeed': newsfeed, 'seen':
+                        {k + 1:False for k in range(items)}, 'current_post': 0,
+                                      'previously_posted': []})
                 else:
-                    # Update the 'seen' dictionary to reflect that the post
-                    # has been seen
-                    G.node[node]['seen'][G.node[post]['current_post']] = True
+                    continue
 
-            # When all posts have been scanned, find which one of them to
-            # repost
-            G.node[node]['current_post'] = find_next_post(G, newsfeed,
-                                                G.node[node]['previously_posted'])
+        with open('test.edgelist', 'r') as file:
+            for line in file:
+                node = int(line.split(' ')[0])
+                if line.split(' ')[1] == 'newsfeed':
+                    continue
+                elif line.split(' ')[1] == 'seen':
+                    continue
+                elif line.split(' ')[1] == 'current_item':
+                    continue
+                elif line.split(' ')[1] == 'previously_posted':
+                    continue
+                else:
+                    G.add_edge(node, int(line.split(' ')[1]))
+        """
+        # Generate random posts at nodes
+        generators = np.random.choice(G.nodes(), size=items, replace=False)
 
-            # Add the posted item to the 'previously_posted' list
-            G.node[node]['previously_posted'].append(G.node[node]['current_post'])
-            # print(node, G.node[node]['seen'], G.node[node]['current_post'],
-            #      G.node[node]['newsfeed'])
+        for post, node in enumerate(generators):
+            G.node[node]['seen'][post + 1] = True
+            G.node[node]['current_post'] = post + 1
+            G.node[node]['previously_posted'] = [post + 1]
 
-        # Check stopping criteria
-        all_seen_all, perc_complete = check_all_seen(G, items)
-        t1 = time.time()
-        print("Iteration", i, " complete. Time: " + str(round(t1 - t0,
-                0)) + "s.\n")
-        print("Percentage complete: " + str(perc_complete) + "%")
-        i += 1
-        #all_seen_all = True
+        all_seen_all = False
+        i = 0
+        t0 = time.time()
+        while not all_seen_all:
+
+            # For every node
+            for node in G.nodes():
+                # Check each post that it can see on its newsfeed
+                newsfeed = G.node[node]['newsfeed']
+                for post in newsfeed:
+                    # If that post number is 0, ignore it
+                    if G.node[post]['current_post'] == 0:
+                        continue
+                    # Otherwise
+                    else:
+                        # Update the 'seen' dictionary to reflect that the post
+                        # has been seen
+                        G.node[node]['seen'][G.node[post]['current_post']] = True
+
+                # When all posts have been scanned, find which one of them to
+                # repost
+                G.node[node]['current_post'] = find_next_post(G, newsfeed,
+                                                    G.node[node]['previously_posted'])
+
+                # Add the posted item to the 'previously_posted' list
+                G.node[node]['previously_posted'].append(G.node[node]['current_post'])
+
+            # Check stopping criteria
+            all_seen_all, perc_complete = check_all_seen(G, items)
+            t1 = time.time()
+            print("Iteration", i, " complete. Time: " + str(round(t1 - t0,
+                    0)) + "s.\n")
+            print("Percentage complete: " + str(perc_complete) + "%")
+            i += 1
+
+        iterations.append(i)
+        diameters.append(nx.diameter(F))
+
+    ave_iterations = np.mean(iterations)
+    ave_diameters = np.mean(diameters)
+    return ave_iterations, ave_diameters
+
+
+def main():
+    F = nx.Graph()
+
+    # Create original network from facebook.txt
+    nx.set_node_attributes(F, 'value', {})
+    with open('facebook_combined.txt', 'r') as file:
+        for line in file:
+            if line[0] != '#':
+                F.add_edge(int(line.strip().split(' ')[0]),
+                           int(line.strip().split(' ')[1]),
+                           strength=0)
+
+    # Add 'strength of connection' as weight to each edge
+    for i in F.nodes():
+        for k in F.neighbors(i):
+            F[i][k]['strength'] = get_strength()
+
+    n = 1
+    items = 20
+    newsfeed_composition = [7, 2, 1]
+    iteration, diameter = random_graph_test(F, n, items, newsfeed_composition)
