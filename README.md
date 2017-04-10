@@ -1,3 +1,11 @@
+To do:
+
+- Create say 100 F graphs and run the simulations (varying 
+newsfeed_composition) on them to save time / increase accuracy of comparisons
+- Fix hangs
+- Fix graph imports
+- Extended exercises
+
 The original network facebook_combined.txt had 4,039 nodes and 88,234 edges.
 
 For the purpose of this assignment, nodes that have 7 or less edges are 
@@ -62,7 +70,7 @@ posts something new; and
  nothing.
 
 Extended exercise 3 relaxes the first constraint, and produces a new 
-newsfeed (albiet one constructed with the same composition) for each day of 
+newsfeed (albeit one constructed with the same composition) for each day of 
 the simulation.
 
 Extended exercise 4 relaxes the 5th assumption, and tests whether displaying

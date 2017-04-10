@@ -215,6 +215,25 @@ def main():
         for k in F.neighbors(i):
             F[i][k]['strength'] = get_strength()
 
+    possible_compositions = [
+        [10, 0, 0],
+        [9, 1, 0],
+        [9, 0, 1],
+        [8, 2, 0],
+        [8, 1, 1],
+        [8, 0, 2],
+        [7, 3, 0],
+        [7, 2, 1],
+        [7, 1, 2],
+        [7, 0, 3],
+        [6, 3, 1],
+        [6, 2, 2],
+        [6, 1, 3],
+        [5, 3, 2],
+        [5, 2, 3],
+        [4, 3, 3]
+    ]
+
     n = 10
     items = 20
     newsfeed_composition = [10, 0, 0]
