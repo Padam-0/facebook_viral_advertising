@@ -44,19 +44,15 @@ def find_next_post(G, newsfeed, previously_posted):
 
 F = nx.Graph()
 
-# Create original network from facebook.txt
-nx.set_node_attributes(F, 'value', {})
-with open('facebook_combined.txt', 'r') as file:
-    for line in file:
-        if line[0] != '#':
-            F.add_edge(int(line.strip().split(' ')[0]),
-                       int(line.strip().split(' ')[1]),
-                       strength=0)
+edges = [['A', 'B'], ['A', 'C'], ['A', 'E'], ['A', 'F'], ['A', 'H'],
+           ['B', 'D'], ['B', 'E'], ['C', 'E'], ['C', 'F'],
+           ['C', 'G'], ['C', 'H'], ['E', 'H'],['F', 'G']]
+for i in edges:
+    F.add_edge(i[0], i[1], strength=0)
 
-# Start simulation
 n = 1
-items = 20
-newsfeed_composition = [7,2,1]
+items = 4
+newsfeed_composition = [3,2,1]
 
 # Add 'strength of connection' as weight to each edge
 for i in F.nodes():
@@ -129,41 +125,10 @@ for i in tqdm(range(n)):
         for j in newsfeed:
             G.add_edge(node, j)
         G.node[node]['newsfeed'] = newsfeed
-        G.node[node]['seen'] = {k + 1: False for k in range(items)}
+        G.node[node]['seen'] = {k + 1:False for k in range(items)}
         G.node[node]['current_post'] = 0
         G.node[node]['previously_posted'] = []
 
-    nx.write_edgelist(G, "test.edgelist")
-    """
-    # Use this to avoid generating the graph during testing. Remove for
-    # production
-
-    with open('test.edgelist', 'r') as file:
-        for line in file:
-            node = int(line.split(' ')[0])
-            if line.split(' ')[1] == 'newsfeed':
-                newsfeed = [int(i) for i in ''.join(line.split(
-                    ' ')[2:])[1:-2].split(',')]
-                G.add_node(node, {'newsfeed': newsfeed, 'seen':
-                    {k + 1:False for k in range(items)}, 'current_post': 0,
-                                  'previously_posted': []})
-            else:
-                continue
-
-    with open('test.edgelist', 'r') as file:
-        for line in file:
-            node = int(line.split(' ')[0])
-            if line.split(' ')[1] == 'newsfeed':
-                continue
-            elif line.split(' ')[1] == 'seen':
-                continue
-            elif line.split(' ')[1] == 'current_item':
-                continue
-            elif line.split(' ')[1] == 'previously_posted':
-                continue
-            else:
-                G.add_edge(node, int(line.split(' ')[1]))
-    """
     # Generate random posts at nodes
     generators = np.random.choice(G.nodes(), size=items, replace=False)
 
@@ -204,7 +169,7 @@ for i in tqdm(range(n)):
 
             # Add the posted item to the 'previously_posted' list
             G.node[node]['previously_posted'].append(G.node[node]['current_post'])
-            # print(node, G.node[node]['seen'], G.node[node]['current_post'],
+            #print(node, G.node[node]['seen'], G.node[node]['current_post'],
             #      G.node[node]['newsfeed'])
 
         # Check stopping criteria
