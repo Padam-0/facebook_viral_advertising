@@ -11,18 +11,42 @@ def get_strength():
     return np.random.exponential(2)
 
 def check_all_seen(G, items):
+    # For each node in the network
     for node in G.nodes():
+        # If it has not seen every post
         if node['seen'] != {k + 1:True for k in range(items)}:
+            # return false and exit loop
             return False
+        # If it has seen every post, move onto next node
         continue
+    # If all nodes have seen all posts, return true
     return True
 
-def find_next_post(G, node, previously_posted):
-    for neighbor in G.neighbors(node):
-        if neighbor['current_post'] == 0:
+def find_next_post(G, newsfeed, previously_posted):
+    # Go down newsfeed
+    # If seen before, don't post
+    # Post first non-seen item
+    # For each post in the newsfeed
+    for post in newsfeed:
+        # If its post number is 0, skip it
+        if G.node[post]['current_post'] == 0:
             continue
-        else:
-            G.node[node]['seen'][neighbor['current_post']] = True
+
+        # If its post number isn't 0, and it hasn't already been posted
+        if G.node[post]['current_post'] not in previously_posted:
+            # Repost that item
+            return G.node[post]['current_post']
+
+    # If nothing has been posted
+    if len(previously_posted) == 0:
+        # Continue to post nothing
+        return 0
+    # Otherwise
+    else:
+        # Post the last posted item
+        return previously_posted[-1]
+
+
 
 
 """
@@ -162,7 +186,8 @@ for i in tqdm(range(n)):
                 newsfeed = [int(i) for i in ''.join(line.split(
                     ' ')[2:])[1:-2].split(',')]
                 G.add_node(node, {'newsfeed': newsfeed, 'seen':
-                    {k + 1:False for k in range(items)}})
+                    {k + 1:False for k in range(items)}, 'current_post': 0,
+                                  'previously_posted': []})
             else:
                 continue
 
@@ -176,28 +201,32 @@ for i in tqdm(range(n)):
             else:
                 G.add_edge(node, int(line.split(' ')[1]))
 
+    # Generate 20 random posts at nodes
+    generators = np.random.choice(G.nodes(), size=items, replace=False)
+
+    for post, node in enumerate(generators):
+        G.node[node]['seen'][post + 1] = True
+        G.node[node]['current_post'] = post + 1
+        G.node[node]['previously_posted'] = [post + 1]
+
     all_seen_all = False
     while not all_seen_all:
-
-        # Generate 20 random posts at nodes
-        generators = np.random.choice(G.nodes(), size=items, replace=False)
-
-        for post, node in enumerate(generators):
-            G.node[node]['seen'][post + 1] = True
-            G.node[node]['current_post'] = post + 1
 
         # For every node
         for node in G.nodes():
             # Check posts it can see:
-            for neighbor in G.neighbors(node):
-                if neighbor['current_post'] == 0:
+            newsfeed = G.node[node]['newsfeed']
+            for post in newsfeed:
+                if G.node[post]['current_post'] == 0:
                     continue
                 else:
-                    G.node[node]['seen'][neighbor['current_post']] = True
+                    G.node[node]['seen'][G.node[post]['current_post']] = True
 
-            previously_posted = []
+            G.node[node]['current_post'] = find_next_post(G, newsfeed,
+                                                G.node[node]['previously_posted'])
 
-            G.node[node]['current_post'] = find_next_post(G, node, previously_posted)
+            G.node[node]['previously_posted'].append(G.node[node]['current_post'])
+
 
 
 
