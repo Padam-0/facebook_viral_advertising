@@ -123,3 +123,10 @@ This results in 16 cases that will be tested:
 
 This forms the base case. There are 4 extended exercises for comparison as 
 features of the simulation are manipulated.
+
+For a given newsfeed composition:
+- Generate 100 random graphs based on that composition
+- For each graph:
+- Run 100 simulations with 20 starting posts
+- Return the average number of iterations required to tranverse the entire 
+network and diameter

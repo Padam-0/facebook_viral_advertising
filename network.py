@@ -2,10 +2,10 @@ import networkx as nx
 import numpy as np
 from tqdm import tqdm
 from operator import itemgetter
-import time
 
 def get_strength():
     return np.random.exponential(2)
+
 
 def check_all_seen(G, items):
     complete = 0
@@ -20,6 +20,7 @@ def check_all_seen(G, items):
         continue
     # If all nodes have seen all posts, return true
     return True, 100
+
 
 def find_next_post(G, newsfeed, previously_posted):
     # For each post in the newsfeed
@@ -43,10 +44,24 @@ def find_next_post(G, newsfeed, previously_posted):
         return np.random.choice(previously_posted)
 
 
-def random_graph_test(F, n, items, newsfeed_composition):
-    iterations = []
-    diameters = []
-    for z in tqdm(range(n)):
+def create_graphs(n_graphs, newsfeed_composition):
+    F = nx.Graph()
+
+    # Create original network from facebook.txt
+    nx.set_node_attributes(F, 'value', {})
+    with open('facebook_combined.txt', 'r') as file:
+        for line in file:
+            if line[0] != '#':
+                F.add_edge(int(line.strip().split(' ')[0]),
+                           int(line.strip().split(' ')[1]),
+                           strength=0)
+
+    # Add 'strength of connection' as weight to each edge
+    for i in F.nodes():
+        for k in F.neighbors(i):
+            F[i][k]['strength'] = get_strength()
+
+    for z in range(n_graphs):
         # Create empty graph
         G = nx.Graph()
 
@@ -114,43 +129,53 @@ def random_graph_test(F, n, items, newsfeed_composition):
             # Add the newsfeed edges to the new graph
             for j in newsfeed:
                 G.add_edge(node, j)
-            G.node[node]['newsfeed'] = newsfeed
-            G.node[node]['seen'] = {k + 1: False for k in range(items)}
-            G.node[node]['current_post'] = 0
-            G.node[node]['previously_posted'] = []
+            G[node]['newsfeed'] = newsfeed
+        filename = './simulation_networks/graph_' + str(z) + '.edgelist'
+        nx.write_edgelist(G, filename)
 
-        """
-        nx.write_edgelist(G, "test.edgelist")
 
-        # Use this to avoid generating the graph during testing. Remove for
-        # production
+def read_edge_list(z, items):
+    filename = './simulation_networks/graph_' + str(z) + '.edgelist'
 
-        with open('test.edgelist', 'r') as file:
+    G = nx.Graph()
+    connected = False
+    while connected != True:
+
+        with open(filename, 'r') as file:
             for line in file:
                 node = int(line.split(' ')[0])
                 if line.split(' ')[1] == 'newsfeed':
                     newsfeed = [int(i) for i in ''.join(line.split(
                         ' ')[2:])[1:-2].split(',')]
                     G.add_node(node, {'newsfeed': newsfeed, 'seen':
-                        {k + 1:False for k in range(items)}, 'current_post': 0,
+                        {k + 1: False for k in range(items)},
+                                      'current_post': 0,
                                       'previously_posted': []})
                 else:
                     continue
 
-        with open('test.edgelist', 'r') as file:
+        with open(filename, 'r') as file:
             for line in file:
                 node = int(line.split(' ')[0])
                 if line.split(' ')[1] == 'newsfeed':
                     continue
-                elif line.split(' ')[1] == 'seen':
-                    continue
-                elif line.split(' ')[1] == 'current_item':
-                    continue
-                elif line.split(' ')[1] == 'previously_posted':
-                    continue
                 else:
                     G.add_edge(node, int(line.split(' ')[1]))
-        """
+
+        if nx.is_connected(G):
+            connected = True
+        else:
+            continue
+
+    return G
+
+
+def random_graph_test(r, q, items):
+    iterations = []
+    # Use this to avoid generating the graph during testing. Remove for
+    # production
+    for z in range(r):
+        G = read_edge_list(q, items)
         # Generate random posts at nodes
         generators = np.random.choice(G.nodes(), size=items, replace=False)
 
@@ -160,6 +185,7 @@ def random_graph_test(F, n, items, newsfeed_composition):
             G.node[node]['previously_posted'] = [post + 1]
 
         all_seen_all = False
+
         i = 0
         while not all_seen_all:
 
@@ -188,33 +214,27 @@ def random_graph_test(F, n, items, newsfeed_composition):
             # Check stopping criteria
             all_seen_all, perc_complete = check_all_seen(G, items)
             i += 1
+            if i > 1000:
+                all_seen_all = True
 
-        print("Iteration " + str(z) + "/" + str(n) + " complete.")
-        iterations.append(i)
-        diameters.append(nx.diameter(F))
+        print("Iteration " + str(z + 1) + "/" + str(r) + " of loop " + str(q
+                + 1) + " complete.")
+        if i != 1001:
+            print("  Iterations: ", i)
+            iterations.append(i)
+        else:
+            print("Timed out. Max iterations reached.")
+
 
     ave_iterations = np.mean(iterations)
-    ave_diameters = np.mean(diameters)
-    return ave_iterations, ave_diameters
+    try:
+        diameter = nx.diameter(G)
+        return ave_iterations, diameter
+    except:
+        return ave_iterations, 0
 
 
 def main():
-    F = nx.Graph()
-
-    # Create original network from facebook.txt
-    nx.set_node_attributes(F, 'value', {})
-    with open('facebook_combined.txt', 'r') as file:
-        for line in file:
-            if line[0] != '#':
-                F.add_edge(int(line.strip().split(' ')[0]),
-                           int(line.strip().split(' ')[1]),
-                           strength=0)
-
-    # Add 'strength of connection' as weight to each edge
-    for i in F.nodes():
-        for k in F.neighbors(i):
-            F[i][k]['strength'] = get_strength()
-
     possible_compositions = [
         [10, 0, 0],
         [9, 1, 0],
@@ -231,15 +251,29 @@ def main():
         [6, 1, 3],
         [5, 3, 2],
         [5, 2, 3],
-        [4, 3, 3]
-    ]
+        [4, 3, 3]]
 
-    n = 10
+    composition = 1
+    n = 1
+    r = 10
     items = 20
-    newsfeed_composition = [10, 0, 0]
-    iteration, diameter = random_graph_test(F, n, items, newsfeed_composition)
-    print("Average iterations: " + iteration)
-    print("Average Diameter: " + diameter)
+
+    create_graphs(n, possible_compositions[composition])
+    iterations = []
+    diameters = []
+
+    for i in range(n):
+        ave_iterations, diameter = random_graph_test(r, i, items)
+        iterations.append(ave_iterations)
+        diameters.append(diameter)
+        print("Iteration " + str(i + 1) + "/" + str(n) + " complete.")
+    print('' + str(n) + " iterations complete.\n")
+    print('Newsfeed composition: ' + str(possible_compositions[composition]))
+    ai = np.mean(iterations)
+    ad = np.mean(diameters)
+    print("Average iterations: " + ai)
+    print("Average Diameter: " + ad)
+
 
 if __name__ == '__main__':
     main()
