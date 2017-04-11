@@ -1,9 +1,5 @@
 To do:
 
-- Create say 100 F graphs and run the simulations (varying 
-newsfeed_composition) on them to save time / increase accuracy of comparisons
-- Fix hangs
-- Fix graph imports
 - Extended exercises
 
 The original network facebook_combined.txt had 4,039 nodes and 88,234 edges.
@@ -125,8 +121,8 @@ This forms the base case. There are 4 extended exercises for comparison as
 features of the simulation are manipulated.
 
 For a given newsfeed composition:
-- Generate 100 random graphs based on that composition
+- Generate 32 random graphs based on that composition
 - For each graph:
-- Run 100 simulations with 20 starting posts
+- Run 32 simulations with 20 starting posts
 - Return the average number of iterations required to tranverse the entire 
 network and diameter
