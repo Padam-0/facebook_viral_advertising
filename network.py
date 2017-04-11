@@ -216,6 +216,17 @@ def random_graph_test(r, q, items):
             i += 1
             if i > 1000:
                 all_seen_all = True
+            elif i == 800:
+                print("Damn! 800 iterations! Don't worry, if we don't reach "
+                      "a solution soon we'll give up!")
+            elif i == 500:
+                print("Woah! Over 500 iterations, hold tight!")
+            elif i == 200:
+                print("Iteration " + str(z + 1) + "/" + str(
+                    r) + " of loop " + str(q + 1) + " in progress.")
+                print("Just hit 200 iterations! This might take a while...")
+            else:
+                continue
 
         print("Iteration " + str(z + 1) + "/" + str(r) + " of loop " + str(q
                 + 1) + " complete.")
@@ -225,13 +236,8 @@ def random_graph_test(r, q, items):
         else:
             print("Timed out. Max iterations reached.")
 
-
-    ave_iterations = np.mean(iterations)
-    try:
-        diameter = nx.diameter(G)
-        return ave_iterations, diameter
-    except:
-        return ave_iterations, 0
+    diameter = nx.diameter(G)
+    return iterations, diameter
 
 
 def main():
@@ -254,25 +260,56 @@ def main():
         [4, 3, 3]]
 
     composition = 1
+    # For each composition, n = 32, r = 32
     n = 1
     r = 10
     items = 20
 
-    create_graphs(n, possible_compositions[composition])
-    iterations = []
+
+    #create_graphs(n, possible_compositions[composition])
+    np.random.seed(121)
+    ave_iterations = []
     diameters = []
 
+    filename = './output_data/output_data_' + \
+               str(possible_compositions[composition][0]) + '_' + \
+               str(possible_compositions[composition][1]) + '_' + \
+               str(possible_compositions[composition][2]) + '.txt'
+
+    with open(filename, 'w') as file:
+        file.write('# Output data for newsfeed composition:\n')
+        file.write('# Strong connections: ' + str(possible_compositions[
+                                                      composition][0]) + '\n')
+        file.write('# Weak connections: ' + str(possible_compositions[
+                                                    composition][1]) + '\n')
+        file.write('# Random connections: ' + str(possible_compositions[
+                                                      composition][2]) + '\n')
+        file.write('{\n')
+
     for i in range(n):
-        ave_iterations, diameter = random_graph_test(r, i, items)
-        iterations.append(ave_iterations)
+        iterations, diameter = random_graph_test(r, i, items)
+        output_data = {
+            'average_iterations' : np.mean(iterations),
+            'network_diameter' : diameter,
+            'iterations': iterations
+        }
+        ave_iterations.append(np.mean(iterations))
         diameters.append(diameter)
+
+        with open(filename, 'a') as file:
+            file.write('' + str(i) + ' : ' + str(output_data) + ',\n')
         print("Iteration " + str(i + 1) + "/" + str(n) + " complete.")
-    print('' + str(n) + " iterations complete.\n")
-    print('Newsfeed composition: ' + str(possible_compositions[composition]))
-    ai = np.mean(iterations)
+
+
+    ai = np.mean(ave_iterations)
     ad = np.mean(diameters)
-    print("Average iterations: " + ai)
-    print("Average Diameter: " + ad)
+
+    with open(filename, 'a') as file:
+        file.write('ave_iterations : ' + str(ai) + ',\n')
+        file.write('ave_diameter : ' + str(ad) + '\n')
+        file.write('}')
+
+
 
 
 if __name__ == '__main__':
