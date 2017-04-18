@@ -2,6 +2,7 @@ import networkx as nx
 import numpy as np
 from tqdm import tqdm
 from operator import itemgetter
+import time
 
 def assign_probabilities(n):
     # Assigns random number from an exponential distribution with mean 0.02
@@ -153,7 +154,6 @@ def random_graph_test(items, threshold, composition, filename):
 
     G = read_graph(filename)
 
-    # Generate random posts at nodes
     node_list = []
     for i in G.nodes(data=True):
         node_list.append([i[0], i[1]['probability']])
@@ -274,7 +274,7 @@ def base_case():
     print(np.std(click_list))
 
 
-def simulation(composition, threshold, items, n_iters, n_graphs):
+def simulation(composition, threshold, items, n_graphs):
     # List of possible newsfeed item breakdowns (strong, weak, random) to be
     # tested
 
@@ -283,23 +283,30 @@ def simulation(composition, threshold, items, n_iters, n_graphs):
     views = []
     conditions = []
 
-    for graph in range(n_graphs):
-        print("Currently testing graph:", str(graph))
+    for graph in tqdm(range(n_graphs)):
         filename = ''.join(['./simulation_networks/fb_parsed_', str(graph),
                             '.edgelist'])
-        for simulation in tqdm(range(n_iters)):
-            iteration, clicked, seen, condition = \
-                random_graph_test(items, threshold, composition, filename)
-            iterations.append(iteration)
-            clicks.append(clicked)
-            views.append(seen)
-            conditions.append(condition)
+
+        iteration, clicked, seen, condition = \
+            random_graph_test(items, threshold, composition, filename)
+        iterations.append(iteration)
+        clicks.append(clicked)
+        views.append(seen)
+        conditions.append(condition)
+
+    condition_dict = {'views upper limit': 0,
+                      'no progress': 0,
+                      'iteration upper limit':0
+                      }
+
+    for condition in conditions:
+        condition_dict[condition] += 1
 
     output_data = {
         'average_iterations' : np.mean(iterations),
         'average_clicks' : np.mean(clicks),
         'average_views' : np.mean(views),
-        'stopping_conditions' : conditions
+        'stopping_conditions' : condition_dict
     }
 
     return output_data
@@ -313,6 +320,7 @@ def write_header_information(composition, filename):
         file.write('# Weak connections: ' + str(composition[1]) + '\n')
         file.write('# Random connections: ' + str(composition[2]) + '\n')
         file.write('{\n')
+
 
 def write_output_data(filename, items, data, final_line):
     with open(filename, 'a') as file:
@@ -328,15 +336,16 @@ def write_footer_information(filename):
 
 
 def main():
+    np.random.seed(123)
+
     number_of_graphs = 20
-    number_of_simulations = 20
     strong_weak_threshold = 0.5
-    """
+
     create_parsed_graph()
 
     for graph in tqdm(range(number_of_graphs)):
         assign_probabilities(str(graph))
-    """
+
 
     possible_compositions = [
         [10, 0, 0],
@@ -356,7 +365,7 @@ def main():
         [5, 2, 3],
         [4, 3, 3]]
 
-    for ad_serve in possible_compositions[:1]:
+    for ad_serve in possible_compositions:
         print("Current composition:", str(ad_serve))
         filename = './output_data/output_data_' + \
                    str(ad_serve[0]) + '_' + \
@@ -367,7 +376,7 @@ def main():
         for items in range(20,105,5):
             print("Current number of starting items:", str(items))
             data = simulation(ad_serve, strong_weak_threshold, items,
-                              number_of_simulations, number_of_graphs)
+                              number_of_graphs)
             if items != 100:
                 write_output_data(filename, items, data, False)
             else:
