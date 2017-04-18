@@ -1,9 +1,0 @@
-# Output data for newsfeed composition:
-# Strong connections: 9
-# Weak connections: 1
-# Random connections: 0
-{
-0 : {'network_diameter': 5, 'iterations': [74, 24, 30, 68, 67, 28, 36, 99, 31, 142], 'average_iterations': 59.899999999999999},
-ave_iterations : 59.9,
-ave_diameter : 5.0
-}

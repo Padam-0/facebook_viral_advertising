@@ -3,52 +3,24 @@ import numpy as np
 from tqdm import tqdm
 from operator import itemgetter
 
-def get_strength():
-    return np.random.exponential(2)
+def assign_probabilities(n):
+    # Assigns random number from an exponential distribution with mean 0.02
+    # to each node as a starting probability
+    F = nx.read_edgelist('./simulation_networks/fb_parsed.edgelist')
+
+    # Assign a random probability
+    for node in F.nodes():
+        F[node]['probability'] = np.random.exponential(0.02)
+
+    filename = ''.join(['./simulation_networks/fb_parsed_', n ,'.edgelist'])
+    # Write the edgelist to file
+    nx.write_edgelist(F, filename)
 
 
-def check_all_seen(G, items):
-    complete = 0
-    # For each node in the network
-    for node in G.nodes():
-        # If it has not seen every post
-        if G.node[node]['seen'] != {k + 1:True for k in range(items)}:
-            # return false and exit loop
-            return False, round(complete/len(G.nodes()),0)
-        # If it has seen every post, move onto next node
-        complete += 1
-        continue
-    # If all nodes have seen all posts, return true
-    return True, 100
-
-
-def find_next_post(G, newsfeed, previously_posted):
-    # For each post in the newsfeed
-    for post in newsfeed:
-        # If its post number is 0, skip it
-        if G.node[post]['current_post'] == 0:
-            continue
-
-        # If its post number isn't 0, and it hasn't already been posted
-        if G.node[post]['current_post'] not in previously_posted:
-            # Repost that item
-            return G.node[post]['current_post']
-
-    # If nothing has been posted
-    if len(previously_posted) == 0:
-        # Continue to post nothing
-        return 0
-    # Otherwise
-    else:
-        # Post a random item that has previously been posted
-        return np.random.choice(previously_posted)
-
-
-def create_graphs(n_graphs, newsfeed_composition):
+def create_parsed_graph():
     F = nx.Graph()
 
     # Create original network from facebook.txt
-    nx.set_node_attributes(F, 'value', {})
     with open('facebook_combined.txt', 'r') as file:
         for line in file:
             if line[0] != '#':
@@ -56,191 +28,316 @@ def create_graphs(n_graphs, newsfeed_composition):
                            int(line.strip().split(' ')[1]),
                            strength=0)
 
+    strength_dict = {}
+
     # Add 'strength of connection' as weight to each edge
-    for i in F.nodes():
-        for k in F.neighbors(i):
-            F[i][k]['strength'] = get_strength()
+    for node in tqdm(F.nodes()):
+        nbrs = F.neighbors(node)
+        for nbr in nbrs:
+            nbr_nbrs = F.neighbors(nbr)
+            # Strength of connection is determined as ratio of shared neighbors
+            strength_dict[(node, nbr)] = (len(
+                [i for i in nbrs if i in nbr_nbrs])) / len(nbrs)
 
-    for z in range(n_graphs):
-        # Create empty graph
-        G = nx.Graph()
+    # Assign edge attributes
+    nx.set_edge_attributes(F, 'strength', strength_dict)
+    filename = './simulation_networks/fb_parsed.edgelist'
 
-        # Create newsfeed for each node in F
-        for node in F.nodes():
-            w_edges = []
-            # Get edge strength for each edge between the current node and its
-            # neighbors
-            for j in F.neighbors(node):
-                w_edges.append([j, F.get_edge_data(node, j)['strength']])
-
-            # Filter w_edges for the strongest 1/3rd of edges
-            strong_nodes = [i for i in w_edges if i[1] > 1.4]
-            # Sort strong nodes descending for strength
-            strong_nodes = sorted(strong_nodes, key=itemgetter(1), reverse=True)
-            # Filter w_edges for remaining 2/3rd of edges
-            weak_nodes = [i for i in w_edges if i[1] <= 1.4]
-            # Sort weak nodes descending for strength
-            weak_nodes = sorted(weak_nodes, key=itemgetter(1), reverse=True)
-            # Set all other non-neighbor nodes as random
-            random_nodes = [i for i in F.nodes() if i not in F.neighbors(node)]
-
-            # Calculate probabilities for each strong and weak node based on
-            # relative strength
-            strong_tot = sum([i[1] for i in strong_nodes])
-            weak_tot = sum([i[1] for i in weak_nodes])
-
-            strong_proba = []
-            for j in strong_nodes:
-                strong_proba.append(j[1]/strong_tot)
-            weak_proba = []
-            for j in weak_nodes:
-                weak_proba.append(j[1] / weak_tot)
-
-            # Construct news feed
-            newsfeed = []
-
-            # If there aren't enough strong nodes to fill the quota
-            if len(strong_nodes) < newsfeed_composition[0]:
-                newsfeed.extend([i[0] for i in strong_nodes])
-            else:
-                # Add a random selection of strong nodes, weighted according to
-                # strength
-                newsfeed.extend(np.random.choice([i[0] for i in strong_nodes],
-                                                 size=newsfeed_composition[0],
-                                                 replace=False, p=strong_proba))
-
-            # If there aren't enough weak nodes to fill the quota
-            if len(weak_nodes) == 0:
-                pass
-            elif len(weak_nodes) < newsfeed_composition[1]:
-                # Add all available weak nodes
-                newsfeed.extend([i[0] for i in weak_nodes])
-            else:
-                # Add a random selection of weak nodes, weighted according to
-                # strength
-                newsfeed.extend(np.random.choice([i[0] for i in weak_nodes],
-                                size=newsfeed_composition[1],
-                                replace=False, p=weak_proba))
-
-            # For remaining spots in the newsfeed, populate with random
-            for j in range(sum(newsfeed_composition) - len(newsfeed)):
-                newsfeed.append(np.random.choice(random_nodes))
-
-            # Add the newsfeed edges to the new graph
-            for j in newsfeed:
-                G.add_edge(node, j)
-            G[node]['newsfeed'] = newsfeed
-        filename = './simulation_networks/graph_' + str(z) + '.edgelist'
-        nx.write_edgelist(G, filename)
+    # Write the edgelist to file
+    nx.write_edgelist(F, filename)
 
 
-def read_edge_list(z, items):
-    filename = './simulation_networks/graph_' + str(z) + '.edgelist'
+def read_graph(filename):
+    # Read in the parsed Facebook graph (with probabilities and strengths) and
+    # construct NetworkX Graph
 
     G = nx.Graph()
-    connected = False
-    while connected != True:
 
-        with open(filename, 'r') as file:
-            for line in file:
-                node = int(line.split(' ')[0])
-                if line.split(' ')[1] == 'newsfeed':
-                    newsfeed = [int(i) for i in ''.join(line.split(
-                        ' ')[2:])[1:-2].split(',')]
-                    G.add_node(node, {'newsfeed': newsfeed, 'seen':
-                        {k + 1: False for k in range(items)},
-                                      'current_post': 0,
-                                      'previously_posted': []})
-                else:
-                    continue
-
-        with open(filename, 'r') as file:
-            for line in file:
-                node = int(line.split(' ')[0])
-                if line.split(' ')[1] == 'newsfeed':
-                    continue
-                else:
-                    G.add_edge(node, int(line.split(' ')[1]))
-
-        if nx.is_connected(G):
-            connected = True
-        else:
-            continue
-
-    return G
-
-
-def random_graph_test(r, q, items):
-    iterations = []
-    # Use this to avoid generating the graph during testing. Remove for
-    # production
-    for z in range(r):
-        G = read_edge_list(q, items)
-        # Generate random posts at nodes
-        generators = np.random.choice(G.nodes(), size=items, replace=False)
-
-        for post, node in enumerate(generators):
-            G.node[node]['seen'][post + 1] = True
-            G.node[node]['current_post'] = post + 1
-            G.node[node]['previously_posted'] = [post + 1]
-
-        all_seen_all = False
-
-        i = 0
-        while not all_seen_all:
-
-            # For every node
-            for node in G.nodes():
-                # Check each post that it can see on its newsfeed
-                newsfeed = G.node[node]['newsfeed']
-                for post in newsfeed:
-                    # If that post number is 0, ignore it
-                    if G.node[post]['current_post'] == 0:
-                        continue
-                    # Otherwise
-                    else:
-                        # Update the 'seen' dictionary to reflect that the post
-                        # has been seen
-                        G.node[node]['seen'][G.node[post]['current_post']] = True
-
-                # When all posts have been scanned, find which one of them to
-                # repost
-                G.node[node]['current_post'] = find_next_post(G, newsfeed,
-                                                    G.node[node]['previously_posted'])
-
-                # Add the posted item to the 'previously_posted' list
-                G.node[node]['previously_posted'].append(G.node[node]['current_post'])
-
-            # Check stopping criteria
-            all_seen_all, perc_complete = check_all_seen(G, items)
-            i += 1
-            if i > 1000:
-                all_seen_all = True
-            elif i == 800:
-                print("Damn! 800 iterations! Don't worry, if we don't reach "
-                      "a solution soon we'll give up!")
-            elif i == 500:
-                print("Woah! Over 500 iterations, hold tight!")
-            elif i == 200:
-                print("Iteration " + str(z + 1) + "/" + str(
-                    r) + " of loop " + str(q + 1) + " in progress.")
-                print("Just hit 200 iterations! This might take a while...")
+    with open(filename, 'r') as file:
+        for line in file:
+            node = int(line.split(' ')[0])
+            # If the line has probability information:
+            if line.split(' ')[1] == 'probability':
+                probability = line.split(' ')[2].strip()
+                # Add node attributes probability, seen, clicked, seen_last and
+                # clicked_last
+                G.add_node(node, {'probability': float(probability),
+                            'seen' : False, 'clicked': False,
+                            'seen_last':False, 'clicked_last': False})
             else:
                 continue
 
-        print("Iteration " + str(z + 1) + "/" + str(r) + " of loop " + str(q
-                + 1) + " complete.")
-        if i != 1001:
-            print("  Iterations: ", i)
-            iterations.append(i)
-        else:
-            print("Timed out. Max iterations reached.")
+    with open(filename, 'r') as file:
+        for line in file:
+            node = int(line.split(' ')[0])
+            # If the line doesn't have probability information:
+            if line.split(' ')[1] != 'probability':
+                s = line.split(' ')[3].strip()[:-2]
+                # Add edge with strength attribute
+                G.add_edge(node, int(line.split(' ')[1]),
+                           strength=float(s))
+            else:
+                continue
 
-    diameter = nx.diameter(G)
-    return iterations, diameter
+    # Return the NetworkX graph
+    return G
+
+
+def increase_prob(strength, probability):
+    probability += strength * 0.1
+
+    return probability
+
+
+def check_stop(G, iteration, clicked, clicked_prev):
+    # Check stopping criteria
+    seen = 0
+    for node in G.nodes():
+        if G.node[node]['seen'] == True:
+            seen += 1
+
+    # If total ad views is over 2000
+    if seen >= 2000:
+        return True, 'views upper limit'
+    # If no ads were clicked in the last iteration
+    elif clicked == clicked_prev:
+        return True, 'no progress'
+    # If over 100 iterations have been conducted
+    elif iteration >= 100:
+        return True, 'iteration upper limit'
+    else:
+        return False, None
+
+
+def get_nbrs(G, node, strength, threshold):
+    # Generate lists of strong, weak or random neighbors for a given node.
+    # Strong/weak classification is based on some threshold of shared
+    # neighbors.
+
+    if strength == 'strong':
+        # Find all neighbors who have edge strength over the threshold
+        nbrs = [i for i in G.neighbors(node) if G[node][i][
+            'strength'] > threshold]
+        # Remove those who have already seen the ad
+        return [i for i in nbrs if G.node[i]['seen'] == False]
+    elif strength == 'weak':
+        # Find all neighbors who have edge strength under the threshold
+        nbrs = [i for i in G.neighbors(node) if G[node][i][
+            'strength'] <= threshold]
+        # Remove those who have already seen the ad
+        return [i for i in nbrs if G.node[i]['seen'] == False]
+    else:
+        # Find all nodes that are not neighbors
+        nbrs = [i for i in G.nodes() if i not in G.neighbors(node)]
+        # Remove those who have already seen the ad
+        return [i for i in nbrs if G.node[i]['seen'] == False]
+
+
+def update_clicks(G):
+    # Generate list of nodes to test based on whether they saw the ad in the
+    # last iteration
+    to_test = []
+    for node in G.nodes():
+        if G.node[node]['seen_last'] == True:
+            to_test.append(node)
+
+    # For each node, randomly check if their probability results in a click or
+    # not
+    for node in to_test:
+        if np.random.random() < G.node[node]['probability']:
+            G.node[node]['clicked'] = True
+            G.node[node]['clicked_last'] = True
+
+
+def random_graph_test(items, threshold, composition, filename):
+
+    G = read_graph(filename)
+
+    # Generate random posts at nodes
+    node_list = []
+    for i in G.nodes(data=True):
+        node_list.append([i[0], i[1]['probability']])
+
+    # Pick `items` number of nodes with the highest probability
+    generators = [i[0] for i in sorted(node_list, key=itemgetter(1),
+                                       reverse=True)[:items]]
+
+    # For each node in the generators, set node characteristics
+    for node in generators:
+        G.node[node]['seen'] = True
+        G.node[node]['clicked'] = True
+        G.node[node]['seen_last'] = True
+        G.node[node]['clicked_last'] = True
+
+    stop = False
+    iteration = 0
+    clicked_prev = items
+
+    # While stopping condition is not met
+    while not stop:
+        # Create list of nodes where an ad was clicked in the previous
+        # iteration
+        latest_clicks = [i for i in G.nodes() if G.node[i][
+            'clicked_last'] == True]
+
+        # For all nodes, reset characteristics
+        for node in G.nodes():
+            G.node[node]['seen_last'] = False
+            G.node[node]['clicked_last'] = False
+
+        # For each node that clicked the ad in the previous iteration
+        for node in latest_clicks:
+            # For each neighbor of this node
+            for nbr in G.neighbors(node):
+                # Increase probability according to edge strength
+                p = increase_prob(G[node][nbr]['strength'], G.node[nbr][
+                    'probability'])
+
+                G.node[nbr]['probablity'] = p
+
+            # Create lists of strong, weak and random nodes for each node
+            strong_nbrs = get_nbrs(G, node, 'strong', threshold)
+            weak_nbrs = get_nbrs(G, node, 'weak', threshold)
+            random_nbrs = get_nbrs(G, node, 'random', threshold)
+
+            to_show = []
+            leftovers = 0
+
+            # Find 10 nodes to show the ads to based on Ad-Serve composition:
+            if composition[0] < len(strong_nbrs):
+                to_show.extend(np.random.choice(strong_nbrs,
+                                size=composition[0], replace=False))
+            else:
+                to_show.extend(strong_nbrs)
+                leftovers += composition[0] - len(strong_nbrs)
+
+            if composition[1] < len(weak_nbrs):
+                to_show.extend(np.random.choice(weak_nbrs,
+                                size=composition[1],replace=False))
+            else:
+                to_show.extend(weak_nbrs)
+                leftovers += composition[1] - len(weak_nbrs)
+            if leftovers > 0:
+                to_show.extend(np.random.choice(random_nbrs,
+                                size=leftovers, replace=False))
+
+            # Update node characteristics for nodes that are shown the ad
+            for node in to_show:
+                G.node[node]['seen_last'] = True
+                G.node[node]['seen'] = True
+
+        # Test each node to see if it clicked the ad or not based on
+        # adjusted probabilities
+        update_clicks(G)
+
+        # Generate summary statistics
+        clicked_list = []
+        seen_list = []
+        for node in G.nodes():
+            if G.node[node]['clicked'] == True:
+                clicked_list.append(node)
+            if G.node[node]['seen'] == True:
+                seen_list.append(node)
+
+        clicked = len(clicked_list)
+        # Check stopping condition
+        stop, condition = check_stop(G, iteration, clicked, clicked_prev)
+        clicked_prev = clicked
+        iteration += 1
+
+    # Return output statistics
+    return iteration, clicked, len(seen_list), condition
+
+
+def base_case():
+    F = nx.Graph()
+
+    # Create original network from facebook.txt
+    nx.set_node_attributes(F, 'probability', {})
+    with open('facebook_combined.txt', 'r') as file:
+        for line in file:
+            if line[0] != '#':
+                F.add_edge(int(line.strip().split(' ')[0]),
+                           int(line.strip().split(' ')[1]),
+                           strength=0)
+
+    click_list = []
+    for i in tqdm(range(1000)):
+        clicks = 0
+        for node in F.nodes():
+            F.node[node]['probability'] = get_strength()
+            if F.node[node]['probability'] > np.random.random():
+                clicks += 1
+        click_list.append(clicks)
+
+    print(np.mean(click_list))
+    print(np.std(click_list))
+
+
+def simulation(composition, threshold, items, n_iters, n_graphs):
+    # List of possible newsfeed item breakdowns (strong, weak, random) to be
+    # tested
+
+    iterations = []
+    clicks = []
+    views = []
+    conditions = []
+
+    for graph in range(n_graphs):
+        print("Currently testing graph:", str(graph))
+        filename = ''.join(['./simulation_networks/fb_parsed_', str(graph),
+                            '.edgelist'])
+        for simulation in tqdm(range(n_iters)):
+            iteration, clicked, seen, condition = \
+                random_graph_test(items, threshold, composition, filename)
+            iterations.append(iteration)
+            clicks.append(clicked)
+            views.append(seen)
+            conditions.append(condition)
+
+    output_data = {
+        'average_iterations' : np.mean(iterations),
+        'average_clicks' : np.mean(clicks),
+        'average_views' : np.mean(views),
+        'stopping_conditions' : conditions
+    }
+
+    return output_data
+
+
+def write_header_information(composition, filename):
+    # Write file header information
+    with open(filename, 'w') as file:
+        file.write('# Output data for newsfeed composition:\n')
+        file.write('# Strong connections: ' + str(composition[0]) + '\n')
+        file.write('# Weak connections: ' + str(composition[1]) + '\n')
+        file.write('# Random connections: ' + str(composition[2]) + '\n')
+        file.write('{\n')
+
+def write_output_data(filename, items, data, final_line):
+    with open(filename, 'a') as file:
+        if final_line == False:
+            file.write('\t' + str(items) + ' : ' + str(data) + ',\n')
+        else:
+            file.write('\t' + str(items) + ' : ' + str(data) + '\n')
+
+
+def write_footer_information(filename):
+    with open(filename, 'a') as file:
+        file.write('}')
 
 
 def main():
+    number_of_graphs = 20
+    number_of_simulations = 20
+    strong_weak_threshold = 0.5
+    """
+    create_parsed_graph()
+
+    for graph in tqdm(range(number_of_graphs)):
+        assign_probabilities(str(graph))
+    """
+
     possible_compositions = [
         [10, 0, 0],
         [9, 1, 0],
@@ -259,57 +356,23 @@ def main():
         [5, 2, 3],
         [4, 3, 3]]
 
-    composition = 1
-    # For each composition, n = 32, r = 32
-    n = 1
-    r = 10
-    items = 20
+    for ad_serve in possible_compositions[:1]:
+        print("Current composition:", str(ad_serve))
+        filename = './output_data/output_data_' + \
+                   str(ad_serve[0]) + '_' + \
+                   str(ad_serve[1]) + '_' + \
+                   str(ad_serve[2]) + '.txt'
+        write_header_information(ad_serve, filename)
 
-
-    #create_graphs(n, possible_compositions[composition])
-    np.random.seed(121)
-    ave_iterations = []
-    diameters = []
-
-    filename = './output_data/output_data_' + \
-               str(possible_compositions[composition][0]) + '_' + \
-               str(possible_compositions[composition][1]) + '_' + \
-               str(possible_compositions[composition][2]) + '.txt'
-
-    with open(filename, 'w') as file:
-        file.write('# Output data for newsfeed composition:\n')
-        file.write('# Strong connections: ' + str(possible_compositions[
-                                                      composition][0]) + '\n')
-        file.write('# Weak connections: ' + str(possible_compositions[
-                                                    composition][1]) + '\n')
-        file.write('# Random connections: ' + str(possible_compositions[
-                                                      composition][2]) + '\n')
-        file.write('{\n')
-
-    for i in range(n):
-        iterations, diameter = random_graph_test(r, i, items)
-        output_data = {
-            'average_iterations' : np.mean(iterations),
-            'network_diameter' : diameter,
-            'iterations': iterations
-        }
-        ave_iterations.append(np.mean(iterations))
-        diameters.append(diameter)
-
-        with open(filename, 'a') as file:
-            file.write('' + str(i) + ' : ' + str(output_data) + ',\n')
-        print("Iteration " + str(i + 1) + "/" + str(n) + " complete.")
-
-
-    ai = np.mean(ave_iterations)
-    ad = np.mean(diameters)
-
-    with open(filename, 'a') as file:
-        file.write('ave_iterations : ' + str(ai) + ',\n')
-        file.write('ave_diameter : ' + str(ad) + '\n')
-        file.write('}')
-
-
+        for items in range(20,105,5):
+            print("Current number of starting items:", str(items))
+            data = simulation(ad_serve, strong_weak_threshold, items,
+                              number_of_simulations, number_of_graphs)
+            if items != 100:
+                write_output_data(filename, items, data, False)
+            else:
+                write_output_data(filename, items, data, True)
+        write_footer_information(filename)
 
 
 if __name__ == '__main__':

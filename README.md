@@ -1,22 +1,79 @@
 To do:
 
-- Extended exercises
+Advertisers on Facebook want to reach the most number of people who are 
+likely to click on their ad and buy their product. Facebook has ways to 
+target ads to users based on likes and interests, but it is unclear if 
+Facebook utilizes friendship information to optimize who is shown specific ads.
+
+Based on the assumption that users are more likely to click on an ad that a
+connection of theirs has already clicked on, can the user network be used 
+to 'spread' the ad in a viral manner to achieve similar numbers of clicks, 
+while showing the ad to fewer people?
+
+Two metrics are important, total number of clicks, and clicks per view. To 
+maximise total clicks, the ad should be shown to all users. If each user has
+an existing probably of clicking on the ad (which is related to other 
+factors), what is the expected number of clicks per view based on this 
+strategy. This forms the base case for our analysis.
+
+If a users underlying probability of clicking on an ad is influenced by 
+connections that have clicked on the ad, then it may make more sense to 
+disseminate the ad throughout the network slowly, in order to target users 
+when their probability of clicking is higher than in the base case.
+
+This method could optimize clicks per view, by only showing the ad to users 
+when they are more likely to click on it.
+
+`Due to cost constraints, if a user clicks on an ad, that ad is only shown 
+to 10 of their connections`. These connections can be selected from one of 
+three lists:
+ - Strong connections of the user;
+ - Weak connection of the user; or
+ - Random user in the network.
+ 
+This distribution of connections is hence referred to as Ad-Serve.
+
+For this simulation, it is assumed that:
+ - A user has a 10% greater chance of clicking on an ad that a strong 
+ connection of theirs has clicked on over their base case probability;
+ - A user has a 5% greater chance of clicking on an ad that a weak 
+ connection of theirs has clicked on over their base case probability.
+
+If 10 users are selected, how many from each list should be selected to 
+maximize the number of overall clicks without showing the ad to too many users.
 
 The original network facebook_combined.txt had 4,039 nodes and 88,234 edges.
 
-For the purpose of this assignment, nodes that have 7 or less edges are 
-ignored. This results in the removal of 654 nodes, resulting in 3385 nodes 
-where a 'newsfeed' is able to be constructed. For those nodes ignored, their 
-newsfeed takes the form of `n` connections to all of their neighbors in the 
-original graph, and then `10 - n` random connections.
+All users were given an underlying probability of clicking on an ad based on
+an exponential distribution, and the base case number of clicks calculated 
+using a independent Bernoulli trial on each user.
 
-For nodes with 8 or more connections, each edge is given a random weight. 
-This weight represents the strength of the relationship between the two 
-edges, and acts as a proxy for 'probability that an article posted by one is 
-seen by the other'.
+In the base case, 80.538 users clicked on the ad (1000 trials, std=8.78)
 
-In the first extended exercise, the weights in the directed graph do not have 
-to be equal. This can be thought of as a 'love triangle' situation. 
+In the simulation, users begin with the same base case probability of 
+clicking on the ad, and the 20 users in the network with the highest 
+underlying probabilty of clicking on the ad are deemed to have 
+'clicked on' that ad. 
+
+All users who have a relationship (connection) with those users have their 
+underlying probability adjusted based on the strength of that connection.
+
+In the each iteration, for each user who has clicked on the ad, the ad is 
+shown to more 10 users who are 'linked' to each of that user based on the 
+Ad-Serve composition.
+
+That is, in the first iteration, 20 people see the ad. In the second, that 
+number grows to (approximately) 200, and so on.
+
+Each user who sees the ad has a probability of clicking on it (base case 
+plus any probability increase due to their connections having clicked on the
+ad)
+
+The simulation ends after the 3000 users have 'seen' the ad, as this is the 
+ad agency's cost constraint. At this stage, the number of clicks is 
+recorded, and compared to the base case and other Ad-Serve compositions.
+
+
 
 The function used to generate weights is an exponential decay function, 
 which embodies the fact that people in social networks generally have a few 
