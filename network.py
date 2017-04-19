@@ -341,11 +341,12 @@ def main():
     number_of_graphs = 20
     strong_weak_threshold = 0.5
 
+    """
     create_parsed_graph()
 
     for graph in tqdm(range(number_of_graphs)):
         assign_probabilities(str(graph))
-
+    """
 
     possible_compositions = [
         [10, 0, 0],
