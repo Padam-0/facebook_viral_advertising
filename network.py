@@ -2,7 +2,7 @@ import networkx as nx
 import numpy as np
 from tqdm import tqdm
 from operator import itemgetter
-import time
+
 
 def assign_probabilities(n):
     # Assigns random number from an exponential distribution with mean 0.03
@@ -13,7 +13,7 @@ def assign_probabilities(n):
     for node in F.nodes():
         F[node]['probability'] = np.random.exponential(0.03)
 
-    filename = ''.join(['./simulation_networks/fb_parsed_', n ,'.edgelist'])
+    filename = ''.join(['./simulation_networks/fb_parsed_', n, '.edgelist'])
     # Write the edgelist to file
     nx.write_edgelist(F, filename)
 
@@ -63,8 +63,8 @@ def read_graph(filename):
                 # Add node attributes probability, seen, clicked, seen_last and
                 # clicked_last
                 G.add_node(node, {'probability': float(probability),
-                            'seen' : False, 'clicked': False,
-                            'seen_last':False, 'clicked_last': False})
+                                  'seen': False, 'clicked': False,
+                                  'seen_last': False, 'clicked_last': False})
             else:
                 continue
 
@@ -94,7 +94,7 @@ def check_stop(G, iteration, clicked, clicked_prev):
     # Check stopping criteria
     seen = 0
     for node in G.nodes():
-        if G.node[node]['seen'] == True:
+        if G.node[node]['seen'] is True:
             seen += 1
 
     # If total ad views is over 2000
@@ -120,18 +120,18 @@ def get_nbrs(G, node, strength, threshold):
         nbrs = [i for i in G.neighbors(node) if G[node][i][
             'strength'] > threshold]
         # Remove those who have already seen the ad
-        return [i for i in nbrs if G.node[i]['seen'] == False]
+        return [i for i in nbrs if G.node[i]['seen'] is False]
     elif strength == 'weak':
         # Find all neighbors who have edge strength under the threshold
         nbrs = [i for i in G.neighbors(node) if G[node][i][
             'strength'] <= threshold]
         # Remove those who have already seen the ad
-        return [i for i in nbrs if G.node[i]['seen'] == False]
+        return [i for i in nbrs if G.node[i]['seen'] is False]
     else:
         # Find all nodes that are not neighbors
         nbrs = [i for i in G.nodes() if i not in G.neighbors(node)]
         # Remove those who have already seen the ad
-        return [i for i in nbrs if G.node[i]['seen'] == False]
+        return [i for i in nbrs if G.node[i]['seen'] is False]
 
 
 def update_clicks(G):
@@ -265,7 +265,8 @@ def base_case():
     for i in tqdm(range(1000)):
         clicks = 0
         for node in F.nodes():
-            F.node[node]['probability'] = get_strength()
+            # Fix this line if gunna do anything with it
+            # F.node[node]['probability'] = get_strength()
             if F.node[node]['probability'] > np.random.random():
                 clicks += 1
         click_list.append(clicks)
@@ -296,7 +297,7 @@ def simulation(composition, threshold, items, n_graphs):
 
     condition_dict = {'views upper limit': 0,
                       'no progress': 0,
-                      'iteration upper limit':0
+                      'iteration upper limit': 0
                       }
 
     for condition in conditions:
@@ -355,15 +356,19 @@ def main():
         [14, 6],
         [12, 8]]
 
+<<<<<<< HEAD
 
     for ad_serve in possible_compositions[3:]:
+=======
+    for ad_serve in possible_compositions[:3]:
+>>>>>>> 546122f99687605fc6820483a5e4ea55ddbc5d80
         print("Current composition:", str(ad_serve))
         filename = './output_data/output_data_' + \
                    str(ad_serve[0]) + '_' + \
                    str(ad_serve[1]) + '.txt'
         write_header_information(ad_serve, filename)
 
-        for items in range(20,42,2):
+        for items in range(20, 42, 2):
             print("Current number of starting items:", str(items))
             data = simulation(ad_serve, strong_weak_threshold, items,
                               number_of_graphs)
