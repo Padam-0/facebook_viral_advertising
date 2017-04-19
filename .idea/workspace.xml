@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0e2f24c-00ec-43c5-95c3-6921a5857736" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/network.py" afterPath="$PROJECT_DIR$/network.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,9 +12,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Assignment 2$network.coverage" NAME="network Coverage Results" MODIFIED="1492594457149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Assignment 2$network.coverage" NAME="network Coverage Results" MODIFIED="1492598593186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Assignment 2$test_network.coverage" NAME="test_network Coverage Results" MODIFIED="1491928224263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Assignment 2$test.coverage" NAME="test Coverage Results" MODIFIED="1492028509099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Assignment 2$test.coverage" NAME="test Coverage Results" MODIFIED="1492598524559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Assignment 2$new_test.coverage" NAME="new_test Coverage Results" MODIFIED="1492010963312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -38,18 +37,34 @@
       <file leaf-file-name="network.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+            <state relative-caret-position="169">
+              <caret line="399" column="4" lean-forward="false" selection-start-line="399" selection-start-column="4" selection-end-line="399" selection-end-column="4" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#712#1664#0" expanded="false" />
-                <element signature="e#1697#2982#0" expanded="false" />
-                <element signature="e#3256#3762#0" expanded="false" />
-                <element signature="e#3813#4838#0" expanded="false" />
-                <element signature="e#4867#5350#0" expanded="false" />
-                <element signature="e#5422#8968#0" expanded="false" />
-                <element signature="e#8992#9781#0" expanded="false" />
-                <element signature="e#9845#10878#0" expanded="false" />
+                <element signature="e#149#863#0" expanded="false" />
+                <element signature="e#897#1849#0" expanded="false" />
+                <element signature="e#1882#3167#0" expanded="false" />
+                <element signature="e#3479#3985#0" expanded="false" />
+                <element signature="e#4036#5061#0" expanded="false" />
+                <element signature="e#5090#5573#0" expanded="false" />
+                <element signature="e#5638#9200#0" expanded="false" />
+                <element signature="e#9224#10013#0" expanded="false" />
+                <element signature="e#10077#11487#0" expanded="false" />
+                <element signature="e#11547#11852#0" expanded="false" />
+                <element signature="e#11917#12133#0" expanded="false" />
+                <element signature="e#12180#12237#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,11 +109,11 @@
         <option value="$PROJECT_DIR$/test_network.py" />
         <option value="$PROJECT_DIR$/new_test.py" />
         <option value="$PROJECT_DIR$/simulation_networks/fb_parsed.edgelist" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/output_data/output_data_10_0_0.txt" />
         <option value="$PROJECT_DIR$/output_data/output_data_16_4.txt" />
         <option value="$PROJECT_DIR$/output_data/output_data_27_3.txt" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/network.py" />
       </list>
     </option>
@@ -110,9 +125,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="y" value="71" />
     <option name="width" value="1440" />
-    <option name="height" value="873" />
+    <option name="height" value="825" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -219,7 +234,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Assignment 2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graphs.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -494,7 +509,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="0" />
+    <frame x="0" y="71" width="1440" height="825" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14806867" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -503,7 +518,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30150068" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -528,7 +543,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -539,14 +554,18 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#712#1664#0" expanded="false" />
-            <element signature="e#1697#2982#0" expanded="false" />
-            <element signature="e#3256#3762#0" expanded="false" />
-            <element signature="e#3813#4838#0" expanded="false" />
-            <element signature="e#4867#5350#0" expanded="false" />
-            <element signature="e#5422#8968#0" expanded="false" />
-            <element signature="e#8992#9781#0" expanded="false" />
-            <element signature="e#9845#10878#0" expanded="false" />
+            <element signature="e#149#863#0" expanded="false" />
+            <element signature="e#897#1849#0" expanded="false" />
+            <element signature="e#1882#3167#0" expanded="false" />
+            <element signature="e#3479#3985#0" expanded="false" />
+            <element signature="e#4036#5061#0" expanded="false" />
+            <element signature="e#5090#5573#0" expanded="false" />
+            <element signature="e#5638#9200#0" expanded="false" />
+            <element signature="e#9224#10013#0" expanded="false" />
+            <element signature="e#10077#11487#0" expanded="false" />
+            <element signature="e#11547#11852#0" expanded="false" />
+            <element signature="e#11917#12133#0" expanded="false" />
+            <element signature="e#12180#12237#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -568,19 +587,23 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#712#1664#0" expanded="false" />
-            <element signature="e#1697#2982#0" expanded="false" />
-            <element signature="e#3256#3762#0" expanded="false" />
-            <element signature="e#3813#4838#0" expanded="false" />
-            <element signature="e#4867#5350#0" expanded="false" />
-            <element signature="e#5422#8968#0" expanded="false" />
-            <element signature="e#8992#9781#0" expanded="false" />
-            <element signature="e#9845#10878#0" expanded="false" />
+            <element signature="e#149#863#0" expanded="false" />
+            <element signature="e#897#1849#0" expanded="false" />
+            <element signature="e#1882#3167#0" expanded="false" />
+            <element signature="e#3479#3985#0" expanded="false" />
+            <element signature="e#4036#5061#0" expanded="false" />
+            <element signature="e#5090#5573#0" expanded="false" />
+            <element signature="e#5638#9200#0" expanded="false" />
+            <element signature="e#9224#10013#0" expanded="false" />
+            <element signature="e#10077#11487#0" expanded="false" />
+            <element signature="e#11547#11852#0" expanded="false" />
+            <element signature="e#11917#12133#0" expanded="false" />
+            <element signature="e#12180#12237#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
+    <entry file="file://$PROJECT_DIR$/graphs.py" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -598,19 +621,23 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#712#1664#0" expanded="false" />
-            <element signature="e#1697#2982#0" expanded="false" />
-            <element signature="e#3256#3762#0" expanded="false" />
-            <element signature="e#3813#4838#0" expanded="false" />
-            <element signature="e#4867#5350#0" expanded="false" />
-            <element signature="e#5422#8968#0" expanded="false" />
-            <element signature="e#8992#9781#0" expanded="false" />
-            <element signature="e#9845#10878#0" expanded="false" />
+            <element signature="e#149#863#0" expanded="false" />
+            <element signature="e#897#1849#0" expanded="false" />
+            <element signature="e#1882#3167#0" expanded="false" />
+            <element signature="e#3479#3985#0" expanded="false" />
+            <element signature="e#4036#5061#0" expanded="false" />
+            <element signature="e#5090#5573#0" expanded="false" />
+            <element signature="e#5638#9200#0" expanded="false" />
+            <element signature="e#9224#10013#0" expanded="false" />
+            <element signature="e#10077#11487#0" expanded="false" />
+            <element signature="e#11547#11852#0" expanded="false" />
+            <element signature="e#11917#12133#0" expanded="false" />
+            <element signature="e#12180#12237#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
+    <entry file="file://$PROJECT_DIR$/graphs.py" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -628,14 +655,18 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#712#1664#0" expanded="false" />
-            <element signature="e#1697#2982#0" expanded="false" />
-            <element signature="e#3256#3762#0" expanded="false" />
-            <element signature="e#3813#4838#0" expanded="false" />
-            <element signature="e#4867#5350#0" expanded="false" />
-            <element signature="e#5422#8968#0" expanded="false" />
-            <element signature="e#8992#9781#0" expanded="false" />
-            <element signature="e#9845#10878#0" expanded="false" />
+            <element signature="e#149#863#0" expanded="false" />
+            <element signature="e#897#1849#0" expanded="false" />
+            <element signature="e#1882#3167#0" expanded="false" />
+            <element signature="e#3479#3985#0" expanded="false" />
+            <element signature="e#4036#5061#0" expanded="false" />
+            <element signature="e#5090#5573#0" expanded="false" />
+            <element signature="e#5638#9200#0" expanded="false" />
+            <element signature="e#9224#10013#0" expanded="false" />
+            <element signature="e#10077#11487#0" expanded="false" />
+            <element signature="e#11547#11852#0" expanded="false" />
+            <element signature="e#11917#12133#0" expanded="false" />
+            <element signature="e#12180#12237#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -686,7 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/simulation_networks/fb_parsed.edgelist">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2614">
@@ -816,20 +846,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/network.py">
+    <entry file="file://$PROJECT_DIR$/output_data/output_data_10_0.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_data/output_data_12_8.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#712#1664#0" expanded="false" />
-            <element signature="e#1697#2982#0" expanded="false" />
-            <element signature="e#3256#3762#0" expanded="false" />
-            <element signature="e#3813#4838#0" expanded="false" />
-            <element signature="e#4867#5350#0" expanded="false" />
-            <element signature="e#5422#8968#0" expanded="false" />
-            <element signature="e#8992#9781#0" expanded="false" />
-            <element signature="e#9845#10878#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="399" column="4" lean-forward="false" selection-start-line="399" selection-start-column="4" selection-end-line="399" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#149#863#0" expanded="false" />
+            <element signature="e#897#1849#0" expanded="false" />
+            <element signature="e#1882#3167#0" expanded="false" />
+            <element signature="e#3479#3985#0" expanded="false" />
+            <element signature="e#4036#5061#0" expanded="false" />
+            <element signature="e#5090#5573#0" expanded="false" />
+            <element signature="e#5638#9200#0" expanded="false" />
+            <element signature="e#9224#10013#0" expanded="false" />
+            <element signature="e#10077#11487#0" expanded="false" />
+            <element signature="e#11547#11852#0" expanded="false" />
+            <element signature="e#11917#12133#0" expanded="false" />
+            <element signature="e#12180#12237#0" expanded="false" />
           </folding>
         </state>
       </provider>
