@@ -4,16 +4,30 @@ from tqdm import tqdm
 from operator import itemgetter
 
 
-def assign_probabilities(n):
+def assign_probabilities(n='0', influencers=False):
     # Assigns random number from an exponential distribution with mean 0.03
     # to each node as a starting probability
     F = nx.read_edgelist('./simulation_networks/fb_parsed.edgelist')
 
     # Assign a random probability
-    for node in F.nodes():
-        F[node]['probability'] = np.random.exponential(0.03)
+    if influencers:
+        for node in F.nodes():
+            F[node]['probability'] = np.random.exponential(0.03)
 
-    filename = ''.join(['./simulation_networks/fb_parsed_', n, '.edgelist'])
+        filename = ''.join(
+            ['./simulation_networks/fb_parsed_', n, '.edgelist'])
+    else:
+        max_degree = 0
+        for node in F.nodes():
+            if F.degree(node) > max_degree:
+                max_degree = F.degree(node)
+
+        for node in F.nodes():
+            F[node]['probability'] = F.degree(node) / max_degree
+
+        filename = ''.join(
+            ['./simulation_networks/fb_parsed_influencers.edgelist'])
+
     # Write the edgelist to file
     nx.write_edgelist(F, filename)
 
@@ -84,8 +98,11 @@ def read_graph(filename):
     return G
 
 
-def increase_prob(strength, probability):
-    probability += strength * 0.1
+def increase_prob(strength, probability, degree, influencers):
+    if influencers:
+        probability += (strength * 0.05 + degree * 0.05)
+    else:
+        probability += strength * 0.1
 
     return probability
 
@@ -150,7 +167,7 @@ def update_clicks(G):
             G.node[node]['clicked_last'] = True
 
 
-def random_graph_test(items, threshold, composition, filename):
+def graph_test(items, threshold, composition, filename, influencers):
 
     G = read_graph(filename)
 
@@ -191,7 +208,7 @@ def random_graph_test(items, threshold, composition, filename):
             for nbr in G.neighbors(node):
                 # Increase probability according to edge strength
                 p = increase_prob(G[node][nbr]['strength'], G.node[nbr][
-                    'probability'])
+                    'probability'], G.degree(node), influencers)
 
                 G.node[nbr]['probablity'] = p
 
@@ -275,7 +292,7 @@ def base_case():
     print(np.std(click_list))
 
 
-def simulation(composition, threshold, items, n_graphs):
+def simulation(composition, threshold, items, n_graphs, influencers):
     # List of possible newsfeed item breakdowns (strong, weak, random) to be
     # tested
 
@@ -284,16 +301,25 @@ def simulation(composition, threshold, items, n_graphs):
     views = []
     conditions = []
 
-    for graph in tqdm(range(n_graphs)):
-        filename = ''.join(['./simulation_networks/fb_parsed_', str(graph),
-                            '.edgelist'])
-
+    if influencers:
+        filename = './simulation_networks/fb_parsed_influencers.edgelist'
         iteration, clicked, seen, condition = \
-            random_graph_test(items, threshold, composition, filename)
+            graph_test(items, threshold, composition, filename, influencers)
         iterations.append(iteration)
         clicks.append(clicked)
         views.append(seen)
         conditions.append(condition)
+    else:
+        for graph in tqdm(range(n_graphs)):
+            filename = ''.join(['./simulation_networks/fb_parsed_', str(graph),
+                                '.edgelist'])
+
+            iteration, clicked, seen, condition = \
+                graph_test(items, threshold, composition, filename, influencers)
+            iterations.append(iteration)
+            clicks.append(clicked)
+            views.append(seen)
+            conditions.append(condition)
 
     condition_dict = {'views upper limit': 0,
                       'no progress': 0,
@@ -336,6 +362,8 @@ def write_footer_information(filename):
 
 
 def main():
+    influencers = False
+
     np.random.seed(123)
 
     number_of_graphs = 20
@@ -345,28 +373,34 @@ def main():
     create_parsed_graph()
 
 
-    for graph in tqdm(range(number_of_graphs)):
-        assign_probabilities(str(graph))
+    if influencers:
+        assign_probabilities(influencers=influencers)
+    else:
+        for graph in tqdm(range(number_of_graphs)):
+            assign_probabilities(n=str(graph))
     """
 
     possible_compositions = [
-        [20, 0],
-        [18, 2],
-        [16, 4],
-        [14, 6],
-        [12, 8]]
+        [10, 0],
+        [9, 1],
+        ]
 
-    for ad_serve in possible_compositions[:3]:
+    for ad_serve in possible_compositions[:1]:
         print("Current composition:", str(ad_serve))
-        filename = './output_data/output_data_' + \
-                   str(ad_serve[0]) + '_' + \
-                   str(ad_serve[1]) + '.txt'
+        if influencers:
+            filename = './output_data/influencers_' + \
+                       str(ad_serve[0]) + '_' + \
+                       str(ad_serve[1]) + '.txt'
+        else:
+            filename = './output_data/output_data_' + \
+                       str(ad_serve[0]) + '_' + \
+                       str(ad_serve[1]) + '.txt'
         write_header_information(ad_serve, filename)
 
-        for items in range(20, 42, 2):
+        for items in range(20, 22, 2):
             print("Current number of starting items:", str(items))
             data = simulation(ad_serve, strong_weak_threshold, items,
-                              number_of_graphs)
+                              number_of_graphs, influencers)
             if items != 2:
                 write_output_data(filename, items, data, False)
             else:

@@ -1,5 +1,11 @@
 To do:
 
+- Create graph where probability is related to the degree of the node 
+'influencers'
+- Do simulations for 10s and 40s
+- Generate graphs, writeup
+
+
 Advertisers on Facebook want to reach the most number of people who are 
 likely to click on their ad and buy their product. Facebook has ways to 
 target ads to users based on likes and interests, but it is unclear if 

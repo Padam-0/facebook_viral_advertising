@@ -1,0 +1,16 @@
+# Output data for newsfeed composition:
+# Strong connections: 24
+# Weak connections: 6
+{
+	20: {'average_views': 2109.5, 'average_iterations': 4.7000000000000002, 'stopping_conditions': {'no progress': 2, 'iteration upper limit': 0, 'views upper limit': 18}, 'average_clicks': 80.349999999999994},
+	22: {'average_views': 2110.0, 'average_iterations': 5.0, 'stopping_conditions': {'no progress': 2, 'iteration upper limit': 0, 'views upper limit': 18}, 'average_clicks': 81.049999999999997},
+	24: {'average_views': 2179.5, 'average_iterations': 3.8999999999999999, 'stopping_conditions': {'no progress': 1, 'iteration upper limit': 0, 'views upper limit': 19}, 'average_clicks': 85.049999999999997},
+	26: {'average_views': 2228.0, 'average_iterations': 3.5, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 88.400000000000006},
+	28: {'average_views': 2297.5, 'average_iterations': 3.1499999999999999, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 96.700000000000003},
+	30: {'average_views': 2478.0, 'average_iterations': 3.0499999999999998, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 102.05},
+	32: {'average_views': 2390.0, 'average_iterations': 2.9500000000000002, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 98.200000000000003},
+	34: {'average_views': 2450.5, 'average_iterations': 2.7000000000000002, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 105.15000000000001},
+	36: {'average_views': 2283.0, 'average_iterations': 2.3500000000000001, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 100.95},
+	38: {'average_views': 2307.5, 'average_iterations': 2.2000000000000002, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 104.05},
+	40: {'average_views': 2278.0, 'average_iterations': 2.0499999999999998, 'stopping_conditions': {'no progress': 0, 'iteration upper limit': 0, 'views upper limit': 20}, 'average_clicks': 101.40000000000001},
+}
