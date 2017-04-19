@@ -342,11 +342,11 @@ def main():
 
     """
     create_parsed_graph()
-    """
+
 
     for graph in tqdm(range(number_of_graphs)):
         assign_probabilities(str(graph))
-
+    """
 
     possible_compositions = [
         [20, 0],
@@ -355,8 +355,8 @@ def main():
         [14, 6],
         [12, 8]]
 
-    """
-    for ad_serve in possible_compositions:
+
+    for ad_serve in possible_compositions[3:]:
         print("Current composition:", str(ad_serve))
         filename = './output_data/output_data_' + \
                    str(ad_serve[0]) + '_' + \
@@ -372,7 +372,7 @@ def main():
             else:
                 write_output_data(filename, items, data, True)
         write_footer_information(filename)
-    """
+
 
 if __name__ == '__main__':
     main()
