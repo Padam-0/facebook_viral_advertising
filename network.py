@@ -350,18 +350,16 @@ def main():
     """
 
     possible_compositions = [
-        [20, 0],
-        [18, 2],
-        [16, 4],
-        [14, 6],
-        [12, 8]]
+        [30, 0],
+        [27, 3],
+        [24, 6],
+        [21, 9],
+        [18, 12],
+        [15, 15],
+        [12, 18]]
 
-<<<<<<< HEAD
 
-    for ad_serve in possible_compositions[3:]:
-=======
-    for ad_serve in possible_compositions[:3]:
->>>>>>> 546122f99687605fc6820483a5e4ea55ddbc5d80
+    for ad_serve in possible_compositions[4:]:
         print("Current composition:", str(ad_serve))
         filename = './output_data/output_data_' + \
                    str(ad_serve[0]) + '_' + \
