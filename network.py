@@ -5,13 +5,13 @@ from operator import itemgetter
 import time
 
 def assign_probabilities(n):
-    # Assigns random number from an exponential distribution with mean 0.02
+    # Assigns random number from an exponential distribution with mean 0.03
     # to each node as a starting probability
     F = nx.read_edgelist('./simulation_networks/fb_parsed.edgelist')
 
     # Assign a random probability
     for node in F.nodes():
-        F[node]['probability'] = np.random.exponential(0.02)
+        F[node]['probability'] = np.random.exponential(0.03)
 
     filename = ''.join(['./simulation_networks/fb_parsed_', n ,'.edgelist'])
     # Write the edgelist to file
@@ -303,10 +303,10 @@ def simulation(composition, threshold, items, n_graphs):
         condition_dict[condition] += 1
 
     output_data = {
-        'average_iterations' : np.mean(iterations),
-        'average_clicks' : np.mean(clicks),
-        'average_views' : np.mean(views),
-        'stopping_conditions' : condition_dict
+        'average_iterations': np.mean(iterations),
+        'average_clicks': np.mean(clicks),
+        'average_views': np.mean(views),
+        'stopping_conditions': condition_dict
     }
 
     return output_data
@@ -318,16 +318,15 @@ def write_header_information(composition, filename):
         file.write('# Output data for newsfeed composition:\n')
         file.write('# Strong connections: ' + str(composition[0]) + '\n')
         file.write('# Weak connections: ' + str(composition[1]) + '\n')
-        file.write('# Random connections: ' + str(composition[2]) + '\n')
         file.write('{\n')
 
 
 def write_output_data(filename, items, data, final_line):
     with open(filename, 'a') as file:
-        if final_line == False:
-            file.write('\t' + str(items) + ' : ' + str(data) + ',\n')
+        if final_line is False:
+            file.write('\t' + str(items) + ': ' + str(data) + ',\n')
         else:
-            file.write('\t' + str(items) + ' : ' + str(data) + '\n')
+            file.write('\t' + str(items) + ': ' + str(data) + '\n')
 
 
 def write_footer_information(filename):
@@ -343,47 +342,37 @@ def main():
 
     """
     create_parsed_graph()
+    """
 
     for graph in tqdm(range(number_of_graphs)):
         assign_probabilities(str(graph))
-    """
+
 
     possible_compositions = [
-        [10, 0, 0],
-        [9, 1, 0],
-        [9, 0, 1],
-        [8, 2, 0],
-        [8, 1, 1],
-        [8, 0, 2],
-        [7, 3, 0],
-        [7, 2, 1],
-        [7, 1, 2],
-        [7, 0, 3],
-        [6, 3, 1],
-        [6, 2, 2],
-        [6, 1, 3],
-        [5, 3, 2],
-        [5, 2, 3],
-        [4, 3, 3]]
+        [20, 0],
+        [18, 2],
+        [16, 4],
+        [14, 6],
+        [12, 8]]
 
+    """
     for ad_serve in possible_compositions:
         print("Current composition:", str(ad_serve))
         filename = './output_data/output_data_' + \
                    str(ad_serve[0]) + '_' + \
-                   str(ad_serve[1]) + '_' + \
-                   str(ad_serve[2]) + '.txt'
+                   str(ad_serve[1]) + '.txt'
         write_header_information(ad_serve, filename)
 
-        for items in range(20,105,5):
+        for items in range(20,42,2):
             print("Current number of starting items:", str(items))
             data = simulation(ad_serve, strong_weak_threshold, items,
                               number_of_graphs)
-            if items != 100:
+            if items != 2:
                 write_output_data(filename, items, data, False)
             else:
                 write_output_data(filename, items, data, True)
         write_footer_information(filename)
-
+    """
 
 if __name__ == '__main__':
     main()

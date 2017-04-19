@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0e2f24c-00ec-43c5-95c3-6921a5857736" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/network.py" afterPath="$PROJECT_DIR$/network.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="network.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="348" column="7" lean-forward="false" selection-start-line="348" selection-start-column="7" selection-end-line="348" selection-end-column="7" />
+            <state relative-caret-position="238">
+              <caret line="319" column="71" lean-forward="false" selection-start-line="319" selection-start-column="71" selection-end-line="319" selection-end-column="71" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#629#1581#0" expanded="false" />
@@ -49,10 +48,8 @@
                 <element signature="e#4660#5143#0" expanded="false" />
                 <element signature="e#5215#8761#0" expanded="false" />
                 <element signature="e#8785#9515#0" expanded="false" />
-                <element signature="e#10675#11054#0" expanded="false" />
-                <element signature="e#11119#11337#0" expanded="false" />
-                <element signature="e#11384#11441#0" expanded="false" />
-                <element signature="e#11701#12007#0" expanded="false" />
+                <element signature="e#11045#11263#0" expanded="false" />
+                <element signature="e#11310#11367#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -495,7 +492,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14806867" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -504,9 +501,9 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09731114" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -529,7 +526,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -547,10 +544,8 @@
             <element signature="e#4660#5143#0" expanded="false" />
             <element signature="e#5215#8761#0" expanded="false" />
             <element signature="e#8785#9515#0" expanded="false" />
-            <element signature="e#10675#11054#0" expanded="false" />
-            <element signature="e#11119#11337#0" expanded="false" />
-            <element signature="e#11384#11441#0" expanded="false" />
-            <element signature="e#11701#12007#0" expanded="false" />
+            <element signature="e#11045#11263#0" expanded="false" />
+            <element signature="e#11310#11367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -579,10 +574,8 @@
             <element signature="e#4660#5143#0" expanded="false" />
             <element signature="e#5215#8761#0" expanded="false" />
             <element signature="e#8785#9515#0" expanded="false" />
-            <element signature="e#10675#11054#0" expanded="false" />
-            <element signature="e#11119#11337#0" expanded="false" />
-            <element signature="e#11384#11441#0" expanded="false" />
-            <element signature="e#11701#12007#0" expanded="false" />
+            <element signature="e#11045#11263#0" expanded="false" />
+            <element signature="e#11310#11367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -612,10 +605,8 @@
             <element signature="e#4660#5143#0" expanded="false" />
             <element signature="e#5215#8761#0" expanded="false" />
             <element signature="e#8785#9515#0" expanded="false" />
-            <element signature="e#10675#11054#0" expanded="false" />
-            <element signature="e#11119#11337#0" expanded="false" />
-            <element signature="e#11384#11441#0" expanded="false" />
-            <element signature="e#11701#12007#0" expanded="false" />
+            <element signature="e#11045#11263#0" expanded="false" />
+            <element signature="e#11310#11367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -645,10 +636,8 @@
             <element signature="e#4660#5143#0" expanded="false" />
             <element signature="e#5215#8761#0" expanded="false" />
             <element signature="e#8785#9515#0" expanded="false" />
-            <element signature="e#10675#11054#0" expanded="false" />
-            <element signature="e#11119#11337#0" expanded="false" />
-            <element signature="e#11384#11441#0" expanded="false" />
-            <element signature="e#11701#12007#0" expanded="false" />
+            <element signature="e#11045#11263#0" expanded="false" />
+            <element signature="e#11310#11367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -791,8 +780,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="348" column="7" lean-forward="false" selection-start-line="348" selection-start-column="7" selection-end-line="348" selection-end-column="7" />
+        <state relative-caret-position="238">
+          <caret line="319" column="71" lean-forward="false" selection-start-line="319" selection-start-column="71" selection-end-line="319" selection-end-column="71" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#629#1581#0" expanded="false" />
@@ -802,10 +791,8 @@
             <element signature="e#4660#5143#0" expanded="false" />
             <element signature="e#5215#8761#0" expanded="false" />
             <element signature="e#8785#9515#0" expanded="false" />
-            <element signature="e#10675#11054#0" expanded="false" />
-            <element signature="e#11119#11337#0" expanded="false" />
-            <element signature="e#11384#11441#0" expanded="false" />
-            <element signature="e#11701#12007#0" expanded="false" />
+            <element signature="e#11045#11263#0" expanded="false" />
+            <element signature="e#11310#11367#0" expanded="false" />
           </folding>
         </state>
       </provider>
