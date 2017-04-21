@@ -6,12 +6,15 @@ from operator import itemgetter
 
 def assign_probabilities(n,
                          filename='./simulation_networks/fb_parsed.edgelist'):
-    # Assigns random number from an exponential distribution with mean 0.03
-    # to each node as a starting probability
+    # Assigns a base case probability to each node, either as a random number
+    # from an exponential distribution with mean 0.03 or as a function of
+    # that nodes degree in the graph
+
     F = nx.read_edgelist(filename)
 
-    # Assign a random probability
+    # If using the influencer model
     if influencers:
+        # Assign a probability based on the degree of the node
         for node in F.nodes():
             F[node]['probability'] = (F.degree(node) / max_degree) * 0.7
 
@@ -20,8 +23,9 @@ def assign_probabilities(n,
         else:
             new_filename = './simulation_networks/fb_parsed_influencers' \
                           '.edgelist'
-
+    # Otherwise
     else:
+        # Assign a random probability
         for node in F.nodes():
             F[node]['probability'] = np.random.exponential(0.03)
 
@@ -34,6 +38,7 @@ def assign_probabilities(n,
 
 def create_parsed_graph(filename='./simulation_networks/fb_parsed.edgelist'):
     if pref_attachment:
+        # Read the graph in from the graph already generated
         F = nx.read_edgelist(filename, data=True)
     else:
         F = nx.Graph()
@@ -102,9 +107,10 @@ def read_graph(filename):
 
 def increase_prob(strength, probability, degree):
     if influencers:
-        # Should be the degrees rank or something?
+        # Use the influencers probability model
         probability += (strength * 0.05 + degree * 0.15)
     else:
+        # Use the standard probability model
         probability += strength * 0.1
 
     return probability
@@ -117,8 +123,8 @@ def check_stop(G, iteration, clicked, clicked_prev):
         if G.node[node]['seen'] is True:
             seen += 1
 
-    # If total ad views is over 4000
-    if seen >= 9750:
+    # If total ad views is over limit
+    if seen >= limit:
         return True, 'views upper limit'
     # If no ads were clicked in the last iteration
     elif clicked == clicked_prev:
@@ -416,39 +422,48 @@ def get_max_degree():
     return md
 
 
-def facebook_graph():
-    global influencers
-    influencers = False
+def facebook_graph(strong_weak_threshold, create_run):
+    # Set seed
+    np.random.seed(123)
 
-    global pref_attachment
-    pref_attachment = False
+    # Set limit
+    global limit
+    if pref_attachment:
+        limit = current_file_to_test[32:-9]
+        if limit != 4039:
+            limit *= 0.975
+        else:
+            limit = 4000
+    else:
+        limit = 4000
 
-    global current_file_to_test
-    current_file_to_test = './simulation_networks/pa_parsed_10000.edgelist'
-
+    # Find and set maximum degree of the network
     global max_degree
     max_degree = get_max_degree()
 
-    np.random.seed(123)
-
+    # Set number of graphs to generate
     number_of_graphs = 20
-    strong_weak_threshold = 0.5
 
-    filenames = ['pa_parsed_10000.edgelist', 'pa_parsed_20000.edgelist']
+    filenames = ['pa_parsed_4039.edgelist', 'pa_parsed_10000.edgelist',
+                 'pa_parsed_20000.edgelist']
 
-    create_parsed_graph()
+    # If graphs need to be created
+    if create_run == 'create':
+        if pref_attachment:
+            for filename in tqdm(filenames):
+                pref_attachment_graph(filename[10:-9], 20, 'write')
+                filename = './simulation_networks/' + filename
+                create_parsed_graph(filename)
+                assign_probabilities('0', filename)
+        elif influencers:
+            create_parsed_graph()
+            assign_probabilities('0')
+        else:
+            create_parsed_graph()
+            for graph in tqdm(range(number_of_graphs)):
+                assign_probabilities(str(graph))
 
-    if pref_attachment:
-        for filename in tqdm(filenames):
-            filename = './simulation_networks/' + filename
-            create_parsed_graph(filename)
-            assign_probabilities('0', filename)
-    elif influencers:
-        assign_probabilities('0')
-    else:
-        for graph in tqdm(range(number_of_graphs)):
-            assign_probabilities(str(graph))
-
+    # Set list of compositions to be trialed
     possible_compositions = [
         [40, 0],
         [36, 4],
@@ -483,15 +498,16 @@ def facebook_graph():
     for ad_serve in possible_compositions:
         print("Current composition:", str(ad_serve))
         if pref_attachment:
-            filename = current_file_to_test[:37] + '_' +\
+            filename = './additional_output_data/' + \
+                       current_file_to_test[22:37] + '_' +\
                        str(ad_serve[0]) + '_' + \
                        str(ad_serve[1]) + '.txt'
         elif influencers:
-            filename = './additional_output_data/influencers_' + \
+            filename = './output_data/influencers_' + \
                        str(ad_serve[0]) + '_' + \
                        str(ad_serve[1]) + '.txt'
         else:
-            filename = './additional_output_data/output_data_' + \
+            filename = './output_data/output_data_' + \
                        str(ad_serve[0]) + '_' + \
                        str(ad_serve[1]) + '.txt'
         write_header_information(ad_serve, filename)
@@ -529,8 +545,18 @@ def pref_attachment_graph(n, m, rw='write'):
 
 
 def main():
-    facebook_graph()
-    # pref_attachment_graph(10000, 20, 'write')
+    global influencers
+    influencers = False
+
+    global pref_attachment
+    pref_attachment = False
+
+    global current_file_to_test
+    current_file_to_test = './simulation_networks/pa_parsed_10000.edgelist'
+
+    strong_weak_threshold = 0.5
+
+    facebook_graph(strong_weak_threshold, 'create')
 
 
 if __name__ == '__main__':
