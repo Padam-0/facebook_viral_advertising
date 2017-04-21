@@ -1,0 +1,21 @@
+# Output data for newsfeed composition:
+# Strong connections: 21
+# Weak connections: 9
+{
+	10: {'average_views': 12760.0, 'average_iterations': 24.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 425.0},
+	12: {'average_views': 9282.0, 'average_iterations': 29.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 309.0},
+	14: {'average_views': 9854.0, 'average_iterations': 16.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 328.0},
+	16: {'average_views': 11086.0, 'average_iterations': 14.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 369.0},
+	18: {'average_views': 10908.0, 'average_iterations': 15.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 363.0},
+	20: {'average_views': 10640.0, 'average_iterations': 13.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 354.0},
+	22: {'average_views': 9742.0, 'average_iterations': 23.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 324.0},
+	24: {'average_views': 13794.0, 'average_iterations': 14.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 459.0},
+	26: {'average_views': 10886.0, 'average_iterations': 15.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 362.0},
+	28: {'average_views': 9808.0, 'average_iterations': 16.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 326.0},
+	30: {'average_views': 11490.0, 'average_iterations': 14.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 382.0},
+	32: {'average_views': 11822.0, 'average_iterations': 16.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 393.0},
+	34: {'average_views': 13294.0, 'average_iterations': 17.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 442.0},
+	36: {'average_views': 9006.0, 'average_iterations': 16.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 299.0},
+	38: {'average_views': 10328.0, 'average_iterations': 14.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 343.0},
+	40: {'average_views': 10540.0, 'average_iterations': 17.0, 'stopping_conditions': {'no progress': 1, 'views upper limit': 0, 'iteration upper limit': 0}, 'average_clicks': 350.0},
+}

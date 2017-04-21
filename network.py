@@ -2,42 +2,50 @@ import networkx as nx
 import numpy as np
 from tqdm import tqdm
 from operator import itemgetter
+import matplotlib.pyplot as plt
 
 
-def assign_probabilities(n, influencers=False):
+def assign_probabilities(n,
+                         filename='./simulation_networks/fb_parsed.edgelist'):
     # Assigns random number from an exponential distribution with mean 0.03
     # to each node as a starting probability
-    F = nx.read_edgelist('./simulation_networks/fb_parsed.edgelist')
+    F = nx.read_edgelist(filename)
 
     # Assign a random probability
     if influencers:
         for node in F.nodes():
             F[node]['probability'] = (F.degree(node) / max_degree) * 0.7
 
-        filename = ''.join(
-            ['./simulation_networks/fb_parsed_influencers.edgelist'])
+        if pref_attachment:
+            new_filename = filename
+        else:
+            new_filename = './simulation_networks/fb_parsed_influencers' \
+                          '.edgelist'
 
     else:
         for node in F.nodes():
             F[node]['probability'] = np.random.exponential(0.03)
 
-        filename = ''.join(
+        new_filename = ''.join(
             ['./simulation_networks/fb_parsed_', n, '.edgelist'])
 
     # Write the edgelist to file
-    nx.write_edgelist(F, filename)
+    nx.write_edgelist(F, new_filename)
 
 
-def create_parsed_graph():
-    F = nx.Graph()
+def create_parsed_graph(filename='./simulation_networks/fb_parsed.edgelist'):
+    if pref_attachment:
+        F = nx.read_edgelist(filename, data=True)
+    else:
+        F = nx.Graph()
 
-    # Create original network from facebook.txt
-    with open('facebook_combined.txt', 'r') as file:
-        for line in file:
-            if line[0] != '#':
-                F.add_edge(int(line.strip().split(' ')[0]),
-                           int(line.strip().split(' ')[1]),
-                           strength=0)
+        # Create original network from facebook.txt
+        with open('facebook_combined.txt', 'r') as file:
+            for line in file:
+                if line[0] != '#':
+                    F.add_edge(int(line.strip().split(' ')[0]),
+                               int(line.strip().split(' ')[1]),
+                               strength=0)
 
     strength_dict = {}
 
@@ -52,7 +60,7 @@ def create_parsed_graph():
 
     # Assign edge attributes
     nx.set_edge_attributes(F, 'strength', strength_dict)
-    filename = './simulation_networks/fb_parsed.edgelist'
+
 
     # Write the edgelist to file
     nx.write_edgelist(F, filename)
@@ -111,8 +119,8 @@ def check_stop(G, iteration, clicked, clicked_prev):
         if G.node[node]['seen'] is True:
             seen += 1
 
-    # If total ad views is over 2000
-    if seen >= 2000:
+    # If total ad views is over 4000
+    if seen >= 9750:
         return True, 'views upper limit'
     # If no ads were clicked in the last iteration
     elif clicked == clicked_prev:
@@ -221,19 +229,46 @@ def graph_test(items, threshold, composition, filename):
             if composition[0] < len(strong_nbrs):
                 to_show.extend(np.random.choice(strong_nbrs,
                                 size=composition[0], replace=False))
+                strong_remain = [i for i in strong_nbrs if i not in to_show]
             else:
                 to_show.extend(strong_nbrs)
+                strong_remain = []
                 leftovers += composition[0] - len(strong_nbrs)
 
             if composition[1] < len(weak_nbrs):
                 to_show.extend(np.random.choice(weak_nbrs,
                                 size=composition[1],replace=False))
+                weak_remain = [i for i in weak_nbrs if i not in to_show]
             else:
                 to_show.extend(weak_nbrs)
+                weak_remain = []
                 leftovers += composition[1] - len(weak_nbrs)
-            if leftovers > 0:
+
+            if leftovers > 0 and leftovers > len(strong_remain):
+                # Fill with strong neighbors
+                to_show.extend(strong_remain)
+                leftovers -= len(strong_remain)
+            elif leftovers > 0:
+                to_show.extend(np.random.choice(strong_remain,
+                                                size=leftovers, replace=False))
+                leftovers = 0
+
+            # Fill with weak neighbors
+            if leftovers > 0 and leftovers > len(weak_remain):
+                to_show.extend(weak_remain)
+                leftovers -= len(weak_remain)
+            elif leftovers > 0:
+                to_show.extend(np.random.choice(weak_remain,
+                                                size=leftovers, replace=False))
+                leftovers = 0
+
+            # Fill with random neighbors
+            if leftovers > 0 and leftovers > len(random_nbrs):
+                to_show.extend(random_nbrs)
+            elif leftovers > 0:
                 to_show.extend(np.random.choice(random_nbrs,
-                                size=leftovers, replace=False))
+                                                size=leftovers,
+                                                replace=False))
 
             # Update node characteristics for nodes that are shown the ad
             for node in to_show:
@@ -289,7 +324,7 @@ def base_case():
     print(np.std(click_list))
 
 
-def simulation(composition, threshold, items, n_graphs):
+def simulation(composition, threshold, items, n_graphs, filenames):
     # List of possible newsfeed item breakdowns (strong, weak, random) to be
     # tested
 
@@ -298,8 +333,13 @@ def simulation(composition, threshold, items, n_graphs):
     views = []
     conditions = []
 
+    if pref_attachment:
+        filename = current_file_to_test
     if influencers:
-        filename = './simulation_networks/fb_parsed_influencers.edgelist'
+        if pref_attachment:
+            filename = current_file_to_test
+        else:
+            filename = './simulation_networks/fb_parsed_influencers.edgelist'
         iteration, clicked, seen, condition = \
             graph_test(items, threshold, composition, filename)
         iterations.append(iteration)
@@ -376,9 +416,15 @@ def get_max_degree():
     return md
 
 
-def main():
+def facebook_graph():
     global influencers
-    influencers = True
+    influencers = False
+
+    global pref_attachment
+    pref_attachment = False
+
+    global current_file_to_test
+    current_file_to_test = './simulation_networks/pa_parsed_10000.edgelist'
 
     global max_degree
     max_degree = get_max_degree()
@@ -388,43 +434,106 @@ def main():
     number_of_graphs = 20
     strong_weak_threshold = 0.5
 
-    """
-    create_parsed_graph()
-    """
+    filenames = ['pa_parsed_10000.edgelist', 'pa_parsed_20000.edgelist']
 
-    if influencers:
-        assign_probabilities('0', influencers)
+    #create_parsed_graph()
+
+    """
+    if pref_attachment:
+        for filename in tqdm(filenames):
+            filename = './simulation_networks/' + filename
+            create_parsed_graph(filename)
+            assign_probabilities('0', filename)
+    elif influencers:
+        assign_probabilities('0')
     else:
         for graph in tqdm(range(number_of_graphs)):
             assign_probabilities(str(graph))
 
-
+    """
     possible_compositions = [
+        [40, 0],
+        #[36, 4],
+        #[32, 8],
+        #[28, 12],
+        #[24, 16],
+        #[20, 20],
+        #[16, 24],
+        #[30, 0],
+        [27, 3],
+        [24, 6],
+        [21, 9],
+        [18, 12],
+        [15, 15],
+        [12, 18],
+        [20, 0],
+        [18, 2],
+        [16, 4],
+        [14, 6],
+        [12, 8],
+        [10, 10],
+        [8, 12],
         [10, 0],
         [9, 1],
+        [8, 2],
+        [7, 3],
+        [6, 4],
+        [5, 5],
+        [4, 6]
         ]
 
-    for ad_serve in possible_compositions[:1]:
+    for ad_serve in possible_compositions:
         print("Current composition:", str(ad_serve))
-        if influencers:
-            filename = './output_data/influencers_' + \
+        if pref_attachment:
+            filename = current_file_to_test[:37] + '_' +\
+                       str(ad_serve[0]) + '_' + \
+                       str(ad_serve[1]) + '.txt'
+        elif influencers:
+            filename = './additional_output_data/influencers_' + \
                        str(ad_serve[0]) + '_' + \
                        str(ad_serve[1]) + '.txt'
         else:
-            filename = './output_data/output_data_' + \
+            filename = './additional_output_data/output_data_' + \
                        str(ad_serve[0]) + '_' + \
                        str(ad_serve[1]) + '.txt'
         write_header_information(ad_serve, filename)
 
-        for items in range(20, 22, 2):
+        for items in range(10, 42, 2):
             print("Current number of starting items:", str(items))
             data = simulation(ad_serve, strong_weak_threshold, items,
-                              number_of_graphs)
+                              number_of_graphs, filenames)
             if items != 2:
                 write_output_data(filename, items, data, False)
             else:
                 write_output_data(filename, items, data, True)
         write_footer_information(filename)
+
+
+
+def pref_attachment_graph(n, m, rw='write'):
+    if rw is 'write':
+        G = nx.barabasi_albert_graph(n, m, seed=123)
+        filename = './simulation_networks/pa_parsed_' + str(n) + '.edgelist'
+        nx.write_edgelist(G, filename)
+    else:
+        G = nx.read_edgelist('./simulation_networks/pa_parsed_' + str(n) +
+        '.edgelist')
+
+        """
+        dd_plot_data = degree_dist(G)
+
+        x_vals = [n for n in dd_plot_data.keys()]
+        y_vals = [n for n in dd_plot_data.values()]
+        plt.scatter(x_vals, y_vals)
+        plt.show()
+        """
+
+    return G
+
+
+def main():
+    facebook_graph()
+    #pref_attachment_graph(10000, 20, 'write')
 
 
 if __name__ == '__main__':
