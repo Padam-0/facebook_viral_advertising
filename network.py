@@ -304,7 +304,7 @@ def graph_test(items, threshold, composition, filename):
     return iteration, clicked, len(seen_list), condition
 
 
-def base_case():
+def run_base_case():
     F = nx.Graph()
 
     # Create original network from facebook.txt
@@ -330,7 +330,7 @@ def base_case():
     print(np.std(click_list))
 
 
-def simulation(composition, threshold, items, n_graphs, filenames):
+def simulation(composition, threshold, items, n_graphs):
     # List of possible newsfeed item breakdowns (strong, weak, random) to be
     # tested
 
@@ -339,39 +339,52 @@ def simulation(composition, threshold, items, n_graphs, filenames):
     views = []
     conditions = []
 
+    # If using prefential attachment
     if pref_attachment:
+        # Set filename
         filename = current_file_to_test
+
     if influencers:
-        if pref_attachment:
-            filename = current_file_to_test
-        else:
+        # Set filename
+        if not pref_attachment:
             filename = './simulation_networks/fb_parsed_influencers.edgelist'
+
+        # Test the graph
         iteration, clicked, seen, condition = \
             graph_test(items, threshold, composition, filename)
+
+        # Append output statistics
         iterations.append(iteration)
         clicks.append(clicked)
         views.append(seen)
         conditions.append(condition)
     else:
+        # For each graph to be tested
         for graph in tqdm(range(n_graphs)):
             filename = ''.join(['./simulation_networks/fb_parsed_', str(graph),
                                 '.edgelist'])
 
+            # Test the graph
             iteration, clicked, seen, condition = \
                 graph_test(items, threshold, composition, filename)
+
+            # Append output statistics
             iterations.append(iteration)
             clicks.append(clicked)
             views.append(seen)
             conditions.append(condition)
 
+    # Create condition dictionary
     condition_dict = {'views upper limit': 0,
                       'no progress': 0,
                       'iteration upper limit': 0
                       }
 
+    # Add an instance of the stopping condition to the condition dictionary
     for condition in conditions:
         condition_dict[condition] += 1
 
+    # Create output data dictionary
     output_data = {
         'average_iterations': np.mean(iterations),
         'average_clicks': np.mean(clicks),
@@ -389,14 +402,6 @@ def write_header_information(composition, filename):
         file.write('# Strong connections: ' + str(composition[0]) + '\n')
         file.write('# Weak connections: ' + str(composition[1]) + '\n')
         file.write('{\n')
-
-
-def write_output_data(filename, items, data, final_line):
-    with open(filename, 'a') as file:
-        if final_line is False:
-            file.write('\t' + str(items) + ': ' + str(data) + ',\n')
-        else:
-            file.write('\t' + str(items) + ': ' + str(data) + '\n')
 
 
 def write_footer_information(filename):
@@ -422,7 +427,16 @@ def get_max_degree():
     return md
 
 
-def facebook_graph(strong_weak_threshold, create_run):
+def pref_attachment_graph(n, m):
+    # Generate a random preferential attachment graph
+    G = nx.barabasi_albert_graph(n, m, seed=123)
+    filename = './simulation_networks/pa_parsed_' + str(n) + '.edgelist'
+    nx.write_edgelist(G, filename)
+
+
+def run_graph_simulation(strong_weak_threshold, create_run,
+                         possible_compositions, seeds, edges_to_add,
+                         number_of_graphs):
     # Set seed
     np.random.seed(123)
 
@@ -441,27 +455,87 @@ def facebook_graph(strong_weak_threshold, create_run):
     global max_degree
     max_degree = get_max_degree()
 
+    # If graphs need to be created
+    if create_run == 'create':
+        # If simulation based on preferential attachment graphs
+        if pref_attachment:
+            # Create the random preferential attachment for given number
+            # of nodes
+            pref_attachment_graph(current_file_to_test[32:-9], edges_to_add)
+            filename = current_file_to_test
+            # Parse the graph to find edge weights
+            create_parsed_graph(filename)
+            # Assign probabilties based on influencers model
+            assign_probabilities('0', filename)
+        elif influencers:
+            # Parse the graph to find edge weights
+            create_parsed_graph()
+            # Assign probabilties based on influencers model
+            assign_probabilities('0')
+        else:
+            # Parse the graph to find edge weights
+            create_parsed_graph()
+            # Assign probabilties based on random exponential model for each
+            # graph
+            for graph in tqdm(range(number_of_graphs)):
+                assign_probabilities(str(graph))
+
+    # For each Ad-Serve composition that needs to be tested
+    for ad_serve in possible_compositions:
+        print("Current composition:", str(ad_serve))
+
+        # Set output filename
+        if pref_attachment:
+            filename = './additional_output_data/' + \
+                       current_file_to_test[22:37] + '_' +\
+                       str(ad_serve[0]) + '_' + \
+                       str(ad_serve[1]) + '.txt'
+        elif influencers:
+            filename = './output_data/influencers_' + \
+                       str(ad_serve[0]) + '_' + \
+                       str(ad_serve[1]) + '.txt'
+        else:
+            filename = './output_data/output_data_' + \
+                       str(ad_serve[0]) + '_' + \
+                       str(ad_serve[1]) + '.txt'
+
+        # Write header information to file
+        write_header_information(ad_serve, filename)
+
+        # For bottom to top seed range
+        for items in range(seeds[0], seeds[1], seeds[2]):
+            print("Current number of starting items:", str(items))
+            # Run the simulation
+            data = simulation(ad_serve, strong_weak_threshold, items,
+                              number_of_graphs)
+            # Write output data
+            with open(filename, 'a') as file:
+                file.write('\t' + str(items) + ': ' + str(data) + '\n')
+
+        # Write footer information
+        write_footer_information(filename)
+
+
+def main():
+    base_case = False
+
+    # Set influencers true if want to run simulations based on the
+    # influencers study
+    global influencers
+    influencers = False
+
+    # Set pref_attachment true if want to use randomly generated graphs
+    global pref_attachment
+    pref_attachment = False
+
+    global current_file_to_test
+    current_file_to_test = './simulation_networks/pa_parsed_10000.edgelist'
+    edges_to_add = 20
+
     # Set number of graphs to generate
     number_of_graphs = 20
 
-    filenames = ['pa_parsed_4039.edgelist', 'pa_parsed_10000.edgelist',
-                 'pa_parsed_20000.edgelist']
-
-    # If graphs need to be created
-    if create_run == 'create':
-        if pref_attachment:
-            for filename in tqdm(filenames):
-                pref_attachment_graph(filename[10:-9], 20, 'write')
-                filename = './simulation_networks/' + filename
-                create_parsed_graph(filename)
-                assign_probabilities('0', filename)
-        elif influencers:
-            create_parsed_graph()
-            assign_probabilities('0')
-        else:
-            create_parsed_graph()
-            for graph in tqdm(range(number_of_graphs)):
-                assign_probabilities(str(graph))
+    strong_weak_threshold = 0.5
 
     # Set list of compositions to be trialed
     possible_compositions = [
@@ -493,70 +567,19 @@ def facebook_graph(strong_weak_threshold, create_run):
         [6, 4],
         [5, 5],
         [4, 6]
-        ]
+    ]
 
-    for ad_serve in possible_compositions:
-        print("Current composition:", str(ad_serve))
-        if pref_attachment:
-            filename = './additional_output_data/' + \
-                       current_file_to_test[22:37] + '_' +\
-                       str(ad_serve[0]) + '_' + \
-                       str(ad_serve[1]) + '.txt'
-        elif influencers:
-            filename = './output_data/influencers_' + \
-                       str(ad_serve[0]) + '_' + \
-                       str(ad_serve[1]) + '.txt'
-        else:
-            filename = './output_data/output_data_' + \
-                       str(ad_serve[0]) + '_' + \
-                       str(ad_serve[1]) + '.txt'
-        write_header_information(ad_serve, filename)
+    # Set seed range
+    bottom_seed, top_seed, seed_step = 10, 40, 2
+    seeds = [bottom_seed, top_seed + seed_step, seed_step]
 
-        for items in range(10, 42, 2):
-            print("Current number of starting items:", str(items))
-            data = simulation(ad_serve, strong_weak_threshold, items,
-                              number_of_graphs, filenames)
-            if items != 2:
-                write_output_data(filename, items, data, False)
-            else:
-                write_output_data(filename, items, data, True)
-        write_footer_information(filename)
-
-
-def pref_attachment_graph(n, m, rw='write'):
-    if rw is 'write':
-        G = nx.barabasi_albert_graph(n, m, seed=123)
-        filename = './simulation_networks/pa_parsed_' + str(n) + '.edgelist'
-        nx.write_edgelist(G, filename)
+    if base_case:
+        run_base_case()
     else:
-        G = nx.read_edgelist('./simulation_networks/pa_parsed_' + str(n) +
-                             '.edgelist')
-
-        """
-        dd_plot_data = degree_dist(G)
-
-        x_vals = [n for n in dd_plot_data.keys()]
-        y_vals = [n for n in dd_plot_data.values()]
-        plt.scatter(x_vals, y_vals)
-        plt.show()
-        """
-
-    return G
-
-
-def main():
-    global influencers
-    influencers = False
-
-    global pref_attachment
-    pref_attachment = False
-
-    global current_file_to_test
-    current_file_to_test = './simulation_networks/pa_parsed_10000.edgelist'
-
-    strong_weak_threshold = 0.5
-
-    facebook_graph(strong_weak_threshold, 'create')
+        # Run graph simulations
+        run_graph_simulation(strong_weak_threshold, 'create',
+                             possible_compositions, seeds, edges_to_add,
+                             number_of_graphs)
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0e2f24c-00ec-43c5-95c3-6921a5857736" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/network.py" afterPath="$PROJECT_DIR$/network.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,30 +36,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="network.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="112" column="44" lean-forward="false" selection-start-line="112" selection-start-column="44" selection-end-line="112" selection-end-column="44" />
+            <state relative-caret-position="321">
+              <caret line="565" column="52" lean-forward="false" selection-start-line="565" selection-start-column="52" selection-end-line="565" selection-end-column="52" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#208#1176#0" expanded="false" />
-                <element signature="e#1261#2332#0" expanded="false" />
                 <element signature="e#2365#3650#0" expanded="false" />
-                <element signature="e#4004#4510#0" expanded="false" />
-                <element signature="e#4561#5586#0" expanded="false" />
-                <element signature="e#5615#6098#0" expanded="false" />
-                <element signature="e#6163#11093#0" expanded="false" />
-                <element signature="e#11117#11906#0" expanded="false" />
-                <element signature="e#11981#13545#0" expanded="false" />
-                <element signature="e#13605#13910#0" expanded="false" />
-                <element signature="e#13975#14191#0" expanded="false" />
-                <element signature="e#14238#14295#0" expanded="false" />
-                <element signature="e#14324#14735#0" expanded="false" />
-                <element signature="e#14764#17267#0" expanded="false" />
-                <element signature="e#15621#16109#0" expanded="false" />
-                <element signature="e#17319#17867#0" expanded="false" />
+                <element signature="e#3707#3944#0" expanded="false" />
+                <element signature="e#4004#4512#0" expanded="false" />
+                <element signature="e#4563#5588#0" expanded="false" />
+                <element signature="e#5617#6100#0" expanded="false" />
+                <element signature="e#6165#11095#0" expanded="false" />
+                <element signature="e#11123#11912#0" expanded="false" />
+                <element signature="e#13600#13905#0" expanded="false" />
+                <element signature="e#13952#14009#0" expanded="false" />
+                <element signature="e#14038#14449#0" expanded="false" />
+                <element signature="e#14489#14695#0" expanded="false" />
+                <element signature="e#14818#17750#0" expanded="false" />
+                <element signature="e#18270#18754#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="442">
+                <caret line="35" column="12" lean-forward="false" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -94,10 +106,15 @@
         <option value="$PROJECT_DIR$/output_data/output_data_10_0_0.txt" />
         <option value="$PROJECT_DIR$/output_data/output_data_16_4.txt" />
         <option value="$PROJECT_DIR$/output_data/output_data_27_3.txt" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/graphs.py" />
+        <option value="$PROJECT_DIR$/output_data/influencers_4_6.txt" />
+        <option value="$PROJECT_DIR$/output_data/influencers_5_5.txt" />
+        <option value="$PROJECT_DIR$/output_data/influencers_6_4.txt" />
+        <option value="$PROJECT_DIR$/output_data/influencers_8_2.txt" />
+        <option value="$PROJECT_DIR$/output_data/influencers_7_3.txt" />
         <option value="$PROJECT_DIR$/network.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -137,6 +154,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Assignment 2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Assignment 2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Assignment 2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="output_data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -537,8 +568,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/new_test.py" />
-    <entry file="file://$PROJECT_DIR$/test.edgelist" />
     <entry file="file://$PROJECT_DIR$/facebook_combined.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2220">
@@ -720,34 +749,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/output_data/influencers_8_2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output_data/influencers_5_5.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/output_data/influencers_20_20.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output_data/influencers_4_6.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="149" lean-forward="false" selection-start-line="10" selection-start-column="131" selection-end-line="10" selection-end-column="149" />
           <folding />
         </state>
       </provider>
@@ -773,17 +778,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="75">
-            <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-            <folding />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -941,29 +935,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/output_data/influencers_4_6.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="179" lean-forward="true" selection-start-line="19" selection-start-column="179" selection-end-line="19" selection-end-column="179" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_data/influencers_5_5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="76" lean-forward="false" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_data/influencers_6_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="76" lean-forward="false" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_data/influencers_8_2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="76" lean-forward="false" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_data/influencers_7_3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="76" lean-forward="false" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="112" column="44" lean-forward="false" selection-start-line="112" selection-start-column="44" selection-end-line="112" selection-end-column="44" />
+        <state relative-caret-position="321">
+          <caret line="565" column="52" lean-forward="false" selection-start-line="565" selection-start-column="52" selection-end-line="565" selection-end-column="52" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#208#1176#0" expanded="false" />
-            <element signature="e#1261#2332#0" expanded="false" />
             <element signature="e#2365#3650#0" expanded="false" />
-            <element signature="e#4004#4510#0" expanded="false" />
-            <element signature="e#4561#5586#0" expanded="false" />
-            <element signature="e#5615#6098#0" expanded="false" />
-            <element signature="e#6163#11093#0" expanded="false" />
-            <element signature="e#11117#11906#0" expanded="false" />
-            <element signature="e#11981#13545#0" expanded="false" />
-            <element signature="e#13605#13910#0" expanded="false" />
-            <element signature="e#13975#14191#0" expanded="false" />
-            <element signature="e#14238#14295#0" expanded="false" />
-            <element signature="e#14324#14735#0" expanded="false" />
-            <element signature="e#14764#17267#0" expanded="false" />
-            <element signature="e#15621#16109#0" expanded="false" />
-            <element signature="e#17319#17867#0" expanded="false" />
+            <element signature="e#3707#3944#0" expanded="false" />
+            <element signature="e#4004#4512#0" expanded="false" />
+            <element signature="e#4563#5588#0" expanded="false" />
+            <element signature="e#5617#6100#0" expanded="false" />
+            <element signature="e#6165#11095#0" expanded="false" />
+            <element signature="e#11123#11912#0" expanded="false" />
+            <element signature="e#13600#13905#0" expanded="false" />
+            <element signature="e#13952#14009#0" expanded="false" />
+            <element signature="e#14038#14449#0" expanded="false" />
+            <element signature="e#14489#14695#0" expanded="false" />
+            <element signature="e#14818#17750#0" expanded="false" />
+            <element signature="e#18270#18754#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="442">
+            <caret line="35" column="12" lean-forward="false" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
