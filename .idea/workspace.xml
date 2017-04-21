@@ -2,43 +2,205 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0e2f24c-00ec-43c5-95c3-6921a5857736" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/influencers_10_0.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_12_18.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_12_8.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_14_6.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_15_15.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_16_4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_18_12.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_18_2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_20_0.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_21_9.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_24_6.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output_data/output_data_27_3.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_10_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_10_10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_12_18.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_12_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_14_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_15_15.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_16_24.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_16_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_18_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_18_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_20_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_20_20.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_21_9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_24_16.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_24_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_27_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_28_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_30_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_32_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_36_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_40_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_4_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_5_5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_6_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_7_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_8_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_8_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/influencers_9_1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_10_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_10_10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_12_18.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_12_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_14_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_15_15.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_16_24.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_16_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_18_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_18_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_20_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_20_20.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_21_9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_24_16.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_24_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_27_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_28_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_30_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_32_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_36_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_40_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_4_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_5_5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_6_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_7_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_8_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_8_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/additional_output_data/output_data_9_1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_10_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_10_10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_12_18.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_12_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_14_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_15_15.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_16_24.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_16_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_18_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_18_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_20_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_20_20.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_21_9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_24_16.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_24_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_27_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_28_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_30_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_32_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_36_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_40_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_4_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_5_5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_6_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_7_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_8_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_8_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_10000_9_1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_10_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_10_10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_12_18.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_12_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_14_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_15_15.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_16_24.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_16_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_18_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_18_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_20_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_20_20.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_21_9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_24_16.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_24_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_27_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_28_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_30_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_32_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_36_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_40_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_4_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_5_5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_6_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_7_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_8_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_8_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_20000_9_1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_10_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_10_10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_12_18.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_12_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_14_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_15_15.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_16_24.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_16_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_18_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_18_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_20_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_20_20.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_21_9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_24_16.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_24_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_27_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_28_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_30_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_32_8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_36_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_40_0.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_4_6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_5_5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_6_4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_7_3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_8_12.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_8_2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/simulation_networks/pa_parsed_4039_9_1.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Influencers.png" afterPath="$PROJECT_DIR$/Influencers.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Original.png" afterPath="$PROJECT_DIR$/Original.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphs.py" afterPath="$PROJECT_DIR$/graphs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/network.py" afterPath="$PROJECT_DIR$/network.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_10_0.txt" afterPath="$PROJECT_DIR$/output_data/influencers_10_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_10_10.txt" afterPath="$PROJECT_DIR$/output_data/influencers_10_10.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_12_18.txt" afterPath="$PROJECT_DIR$/output_data/influencers_12_18.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_12_8.txt" afterPath="$PROJECT_DIR$/output_data/influencers_12_8.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_14_6.txt" afterPath="$PROJECT_DIR$/output_data/influencers_14_6.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_15_15.txt" afterPath="$PROJECT_DIR$/output_data/influencers_15_15.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_16_24.txt" afterPath="$PROJECT_DIR$/output_data/influencers_16_24.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_16_4.txt" afterPath="$PROJECT_DIR$/output_data/influencers_16_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_18_12.txt" afterPath="$PROJECT_DIR$/output_data/influencers_18_12.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_18_2.txt" afterPath="$PROJECT_DIR$/output_data/influencers_18_2.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_20_0.txt" afterPath="$PROJECT_DIR$/output_data/influencers_20_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_20_20.txt" afterPath="$PROJECT_DIR$/output_data/influencers_20_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_21_9.txt" afterPath="$PROJECT_DIR$/output_data/influencers_21_9.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_24_16.txt" afterPath="$PROJECT_DIR$/output_data/influencers_24_16.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_24_6.txt" afterPath="$PROJECT_DIR$/output_data/influencers_24_6.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_27_3.txt" afterPath="$PROJECT_DIR$/output_data/influencers_27_3.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_28_12.txt" afterPath="$PROJECT_DIR$/output_data/influencers_28_12.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_30_0.txt" afterPath="$PROJECT_DIR$/output_data/influencers_30_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_32_8.txt" afterPath="$PROJECT_DIR$/output_data/influencers_32_8.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_36_4.txt" afterPath="$PROJECT_DIR$/output_data/influencers_36_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_40_0.txt" afterPath="$PROJECT_DIR$/output_data/influencers_40_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_4_6.txt" afterPath="$PROJECT_DIR$/output_data/influencers_4_6.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_5_5.txt" afterPath="$PROJECT_DIR$/output_data/influencers_5_5.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_6_4.txt" afterPath="$PROJECT_DIR$/output_data/influencers_6_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_7_3.txt" afterPath="$PROJECT_DIR$/output_data/influencers_7_3.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_8_12.txt" afterPath="$PROJECT_DIR$/output_data/influencers_8_12.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_8_2.txt" afterPath="$PROJECT_DIR$/output_data/influencers_8_2.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/influencers_9_1.txt" afterPath="$PROJECT_DIR$/output_data/influencers_9_1.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_10_0.txt" afterPath="$PROJECT_DIR$/output_data/output_data_10_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_10_10.txt" afterPath="$PROJECT_DIR$/output_data/output_data_10_10.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_12_18.txt" afterPath="$PROJECT_DIR$/output_data/output_data_12_18.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_12_8.txt" afterPath="$PROJECT_DIR$/output_data/output_data_12_8.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_14_6.txt" afterPath="$PROJECT_DIR$/output_data/output_data_14_6.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_15_15.txt" afterPath="$PROJECT_DIR$/output_data/output_data_15_15.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_16_24.txt" afterPath="$PROJECT_DIR$/output_data/output_data_16_24.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_16_4.txt" afterPath="$PROJECT_DIR$/output_data/output_data_16_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_18_12.txt" afterPath="$PROJECT_DIR$/output_data/output_data_18_12.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_18_2.txt" afterPath="$PROJECT_DIR$/output_data/output_data_18_2.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_20_0.txt" afterPath="$PROJECT_DIR$/output_data/output_data_20_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_20_20.txt" afterPath="$PROJECT_DIR$/output_data/output_data_20_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_21_9.txt" afterPath="$PROJECT_DIR$/output_data/output_data_21_9.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_24_16.txt" afterPath="$PROJECT_DIR$/output_data/output_data_24_16.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_24_6.txt" afterPath="$PROJECT_DIR$/output_data/output_data_24_6.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_27_3.txt" afterPath="$PROJECT_DIR$/output_data/output_data_27_3.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_28_12.txt" afterPath="$PROJECT_DIR$/output_data/output_data_28_12.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_30_0.txt" afterPath="$PROJECT_DIR$/output_data/output_data_30_0.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_0.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_0.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_1.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_1.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_10.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_10.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_11.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_11.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_12.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_12.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_13.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_13.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_14.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_14.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_15.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_15.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_16.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_16.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_17.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_17.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_18.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_18.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_19.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_19.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_2.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_2.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_3.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_3.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_4.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_4.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_5.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_5.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_6.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_6.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_7.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_7.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_8.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_8.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_9.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_9.edgelist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_networks/fb_parsed_influencers.edgelist" afterPath="$PROJECT_DIR$/simulation_networks/fb_parsed_influencers.edgelist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_32_8.txt" afterPath="$PROJECT_DIR$/output_data/output_data_32_8.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_36_4.txt" afterPath="$PROJECT_DIR$/output_data/output_data_36_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_40_0.txt" afterPath="$PROJECT_DIR$/output_data/output_data_40_0.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_4_6.txt" afterPath="$PROJECT_DIR$/output_data/output_data_4_6.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_5_5.txt" afterPath="$PROJECT_DIR$/output_data/output_data_5_5.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_6_4.txt" afterPath="$PROJECT_DIR$/output_data/output_data_6_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_7_3.txt" afterPath="$PROJECT_DIR$/output_data/output_data_7_3.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_8_12.txt" afterPath="$PROJECT_DIR$/output_data/output_data_8_12.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_8_2.txt" afterPath="$PROJECT_DIR$/output_data/output_data_8_2.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_data/output_data_9_1.txt" afterPath="$PROJECT_DIR$/output_data/output_data_9_1.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,7 +212,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Assignment 2$network.coverage" NAME="network Coverage Results" MODIFIED="1492719522613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Assignment 2$test_network.coverage" NAME="test_network Coverage Results" MODIFIED="1491928224263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Assignment 2$test.coverage" NAME="test Coverage Results" MODIFIED="1492771853986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Assignment 2$test.coverage" NAME="test Coverage Results" MODIFIED="1492777647553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Assignment 2$new_test.coverage" NAME="new_test Coverage Results" MODIFIED="1492010963312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Assignment 2$lab.coverage" NAME="lab Coverage Results" MODIFIED="1492680631842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Learning Materials/Week 9" />
   </component>
@@ -71,45 +233,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="network.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/network.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="423" column="27" lean-forward="false" selection-start-line="423" selection-start-column="27" selection-end-line="423" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#240#1021#0" expanded="false" />
-                <element signature="e#1106#2117#0" expanded="false" />
-                <element signature="e#2150#3435#0" expanded="false" />
-                <element signature="e#3492#3687#0" expanded="false" />
-                <element signature="e#4304#5329#0" expanded="false" />
-                <element signature="e#5358#5841#0" expanded="false" />
-                <element signature="e#5906#10707#0" expanded="false" />
-                <element signature="e#10731#11520#0" expanded="false" />
-                <element signature="e#11595#13159#0" expanded="false" />
-                <element signature="e#13219#13524#0" expanded="false" />
-                <element signature="e#13589#13805#0" expanded="false" />
-                <element signature="e#13852#13909#0" expanded="false" />
-                <element signature="e#13938#14349#0" expanded="false" />
-                <element signature="e#16958#17485#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="graphs.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/graphs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="123" column="60" lean-forward="false" selection-start-line="123" selection-start-column="60" selection-end-line="123" selection-end-column="60" />
+            <state relative-caret-position="218">
+              <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#178#1543#0" expanded="false" />
-                <element signature="e#1575#2056#0" expanded="false" />
-                <element signature="e#2095#2896#0" expanded="false" />
-                <element signature="e#3780#4059#0" expanded="false" />
-                <element signature="e#4098#5339#0" expanded="false" />
-                <element signature="e#5374#7764#0" expanded="false" />
+                <element signature="e#212#1577#0" expanded="false" />
+                <element signature="e#1609#2090#0" expanded="false" />
+                <element signature="e#2129#2930#0" expanded="false" />
+                <element signature="e#3781#4060#0" expanded="false" />
+                <element signature="e#4099#5340#0" expanded="false" />
+                <element signature="e#5375#7660#0" expanded="false" />
+                <element signature="e#7709#8730#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -160,9 +297,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="41" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="855" />
+    <option name="height" value="872" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -189,48 +326,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simulation_networks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="output_data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assignment 2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="additional_output_data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -592,8 +687,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="41" width="1440" height="855" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="23" width="1440" height="872" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22317597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -601,9 +696,9 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28964612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2820513" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760897" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263434" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09731114" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -626,7 +721,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1011,8 +1106,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="423" column="27" lean-forward="false" selection-start-line="423" selection-start-column="27" selection-end-line="423" selection-end-column="27" />
+        <state relative-caret-position="360">
+          <caret line="436" column="30" lean-forward="false" selection-start-line="436" selection-start-column="30" selection-end-line="436" selection-end-column="30" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#240#1021#0" expanded="false" />
@@ -1035,16 +1130,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/graphs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="123" column="60" lean-forward="false" selection-start-line="123" selection-start-column="60" selection-end-line="123" selection-end-column="60" />
+        <state relative-caret-position="218">
+          <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#178#1543#0" expanded="false" />
-            <element signature="e#1575#2056#0" expanded="false" />
-            <element signature="e#2095#2896#0" expanded="false" />
-            <element signature="e#3780#4059#0" expanded="false" />
-            <element signature="e#4098#5339#0" expanded="false" />
-            <element signature="e#5374#7764#0" expanded="false" />
+            <element signature="e#212#1577#0" expanded="false" />
+            <element signature="e#1609#2090#0" expanded="false" />
+            <element signature="e#2129#2930#0" expanded="false" />
+            <element signature="e#3781#4060#0" expanded="false" />
+            <element signature="e#4099#5340#0" expanded="false" />
+            <element signature="e#5375#7660#0" expanded="false" />
+            <element signature="e#7709#8730#0" expanded="false" />
           </folding>
         </state>
       </provider>
