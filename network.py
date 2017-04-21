@@ -2,7 +2,6 @@ import networkx as nx
 import numpy as np
 from tqdm import tqdm
 from operator import itemgetter
-import matplotlib.pyplot as plt
 
 
 def assign_probabilities(n,
@@ -60,7 +59,6 @@ def create_parsed_graph(filename='./simulation_networks/fb_parsed.edgelist'):
 
     # Assign edge attributes
     nx.set_edge_attributes(F, 'strength', strength_dict)
-
 
     # Write the edgelist to file
     nx.write_edgelist(F, filename)
@@ -161,7 +159,7 @@ def update_clicks(G):
     # last iteration
     to_test = []
     for node in G.nodes():
-        if G.node[node]['seen_last'] == True:
+        if G.node[node]['seen_last'] is True:
             to_test.append(node)
 
     # For each node, randomly check if their probability results in a click or
@@ -200,7 +198,7 @@ def graph_test(items, threshold, composition, filename):
         # Create list of nodes where an ad was clicked in the previous
         # iteration
         latest_clicks = [i for i in G.nodes() if G.node[i][
-            'clicked_last'] == True]
+            'clicked_last'] is True]
 
         # For all nodes, reset characteristics
         for node in G.nodes():
@@ -228,7 +226,8 @@ def graph_test(items, threshold, composition, filename):
             # Find 10 nodes to show the ads to based on Ad-Serve composition:
             if composition[0] < len(strong_nbrs):
                 to_show.extend(np.random.choice(strong_nbrs,
-                                size=composition[0], replace=False))
+                                                size=composition[0],
+                                                replace=False))
                 strong_remain = [i for i in strong_nbrs if i not in to_show]
             else:
                 to_show.extend(strong_nbrs)
@@ -237,7 +236,8 @@ def graph_test(items, threshold, composition, filename):
 
             if composition[1] < len(weak_nbrs):
                 to_show.extend(np.random.choice(weak_nbrs,
-                                size=composition[1],replace=False))
+                                                size=composition[1],
+                                                replace=False))
                 weak_remain = [i for i in weak_nbrs if i not in to_show]
             else:
                 to_show.extend(weak_nbrs)
@@ -283,9 +283,9 @@ def graph_test(items, threshold, composition, filename):
         clicked_list = []
         seen_list = []
         for node in G.nodes():
-            if G.node[node]['clicked'] == True:
+            if G.node[node]['clicked'] is True:
                 clicked_list.append(node)
-            if G.node[node]['seen'] == True:
+            if G.node[node]['seen'] is True:
                 seen_list.append(node)
 
         clicked = len(clicked_list)
@@ -436,9 +436,8 @@ def facebook_graph():
 
     filenames = ['pa_parsed_10000.edgelist', 'pa_parsed_20000.edgelist']
 
-    #create_parsed_graph()
+    create_parsed_graph()
 
-    """
     if pref_attachment:
         for filename in tqdm(filenames):
             filename = './simulation_networks/' + filename
@@ -450,16 +449,15 @@ def facebook_graph():
         for graph in tqdm(range(number_of_graphs)):
             assign_probabilities(str(graph))
 
-    """
     possible_compositions = [
         [40, 0],
-        #[36, 4],
-        #[32, 8],
-        #[28, 12],
-        #[24, 16],
-        #[20, 20],
-        #[16, 24],
-        #[30, 0],
+        [36, 4],
+        [32, 8],
+        [28, 12],
+        [24, 16],
+        [20, 20],
+        [16, 24],
+        [30, 0],
         [27, 3],
         [24, 6],
         [21, 9],
@@ -509,7 +507,6 @@ def facebook_graph():
         write_footer_information(filename)
 
 
-
 def pref_attachment_graph(n, m, rw='write'):
     if rw is 'write':
         G = nx.barabasi_albert_graph(n, m, seed=123)
@@ -517,7 +514,7 @@ def pref_attachment_graph(n, m, rw='write'):
         nx.write_edgelist(G, filename)
     else:
         G = nx.read_edgelist('./simulation_networks/pa_parsed_' + str(n) +
-        '.edgelist')
+                             '.edgelist')
 
         """
         dd_plot_data = degree_dist(G)
@@ -533,7 +530,7 @@ def pref_attachment_graph(n, m, rw='write'):
 
 def main():
     facebook_graph()
-    #pref_attachment_graph(10000, 20, 'write')
+    # pref_attachment_graph(10000, 20, 'write')
 
 
 if __name__ == '__main__':

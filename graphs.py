@@ -1,11 +1,11 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
 import numpy as np
 import os
 import ast
 from operator import itemgetter
 import seaborn as sns
+
 
 def distribution_plot():
     F = nx.Graph()
@@ -41,7 +41,7 @@ def distribution_plot():
     plt.scatter(x, y, c='red', s=0.8, edgecolor='red')
     plt.scatter(x, y_1, c='blue', s=0.8, edgecolor='blue')
 
-    plt.legend(labels=["Calculated Influence","Exponential Distribution"],
+    plt.legend(labels=["Calculated Influence", "Exponential Distribution"],
                bbox_to_anchor=(0.05, .9, 0., 0.), loc=3, mode="expand",
                borderaxespad=0., markerscale=6)
 
@@ -76,7 +76,7 @@ def num_influencers_plot(data):
     clicks_y = []
     views_y = []
     clicks_per_view_y = []
-    for key in range(10,42,2):
+    for key in range(10, 42, 2):
         x.append(key)
         clicks = data[key]['average_clicks'] - key
         views = data[key]['average_views'] - key
@@ -177,7 +177,6 @@ def degree_distribution_plot():
     plt.ylim([-5, 400])
     plt.yticks([i for i in range(0, 450, 50)])
     plt.xlim([0, 1100])
-    #plt.xticks([0, 1000, 2000, 3000, 4000])
     plt.show()
 
 
@@ -210,7 +209,7 @@ def composition_plot(data):
 
     sns.set_style("white")
     plt.rc('font', family='Raleway')
-    fig, ax1 = plt.subplots(figsize=(20,10))
+    fig, ax1 = plt.subplots(figsize=(20, 10))
     plt.subplots_adjust(bottom=0.15)
 
     fig.canvas.draw()
@@ -328,7 +327,6 @@ def large_composition_plot():
         else:
             k4_criteria.append(False)
 
-
     for item in k10_val:
         if item[2] > 9750:
             k10_criteria.append(True)
@@ -387,7 +385,6 @@ def large_composition_plot():
                borderaxespad=0., markerscale=1)
 
     sns.despine()
-    #plt.ylim([0,0.1])
     ax1.set_xlabel('Structure of Ad-Serve')
     ax1.set_ylabel('Clicks per View')
     plt.xlim([-1, len(plot_labels) + 1])
@@ -396,13 +393,14 @@ def large_composition_plot():
 
 
 def main():
-    #distribution_plot()
-    #degree_distribution_plot()
-    #data = read_file('./additional_output_data/influencers_4_6.txt')
-    #num_influencers_plot(data)
-    #sorted_data = composition_data(True, True)
-    #composition_plot(sorted_data)
+    # distribution_plot()
+    # degree_distribution_plot()
+    # data = read_file('./additional_output_data/influencers_4_6.txt')
+    # num_influencers_plot(data)
+    # sorted_data = composition_data(True, True)
+    # composition_plot(sorted_data)
     large_composition_plot()
+
 
 if __name__ == '__main__':
     main()
