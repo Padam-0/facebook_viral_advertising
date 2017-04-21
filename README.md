@@ -37,3 +37,17 @@ All of these options can be called set in main().
 
 ##### graphs.py
 
+Can be run from the command line by calling python network.py with no 
+additional arguments. Graphs that can be generated from the file are:
+- Probability distribution plot of influencers probability distribution 
+against exponential (mean 0.03) distribution;
+- Degree distribution plot of Facebook network vs randomly generated 
+networks (preferential attachment method);
+- Output statistics vs number of seed nodes for both exponential probability
+ distribution and influencers model;
+- Output statistics of best case seed for each Ad-Serve composition for the 
+Facebook graph; and
+- Output statistics of best case seed for each Ad-Serve composition for 
+randomly generated graphs.
+
+All of these can be selected or deselected (by commenting out) in main().

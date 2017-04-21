@@ -393,12 +393,16 @@ def large_composition_plot():
 
 
 def main():
-    # distribution_plot()
-    # degree_distribution_plot()
-    # data = read_file('./additional_output_data/influencers_4_6.txt')
-    # num_influencers_plot(data)
-    # sorted_data = composition_data(True, True)
-    # composition_plot(sorted_data)
+    distribution_plot()
+
+    degree_distribution_plot()
+
+    data = read_file('./additional_output_data/influencers_4_6.txt')
+    num_influencers_plot(data)
+
+    sorted_data = composition_data(influencers=True, threshold=True)
+    composition_plot(sorted_data)
+
     large_composition_plot()
 
 
